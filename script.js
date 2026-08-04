@@ -112,6 +112,24 @@ const creatorTierStatus = document.querySelector("#creatorTierStatus");
 const creatorTierStages = document.querySelectorAll(".creator-tier-stage");
 
 let activePlatform = "tiktok";
+let pigeonPopoutTimer;
+
+function hidePigeonPopout() {
+  clearTimeout(pigeonPopoutTimer);
+  pigeonOverlay.classList.add("hidden");
+  pigeonOverlay.classList.add("compact");
+  pigeonOverlay.classList.remove("expanded");
+  pigeonGradePopout.setAttribute("aria-expanded", "false");
+}
+
+function showPigeonPopout() {
+  clearTimeout(pigeonPopoutTimer);
+  pigeonOverlay.classList.remove("hidden");
+  pigeonOverlay.classList.add("compact");
+  pigeonOverlay.classList.remove("expanded");
+  pigeonGradePopout.setAttribute("aria-expanded", "false");
+  pigeonPopoutTimer = setTimeout(hidePigeonPopout, 15000);
+}
 
 function setPerspective(perspective) {
   simulationSection.dataset.perspective = perspective;
@@ -119,7 +137,7 @@ function setPerspective(perspective) {
     tab.classList.toggle("active", tab.dataset.perspective === perspective);
     tab.setAttribute("aria-selected", String(tab.dataset.perspective === perspective));
   });
-  pigeonOverlay.classList.add("hidden");
+  hidePigeonPopout();
   creatorPigeon.classList.toggle("hidden", perspective !== "creator");
 }
 
@@ -144,10 +162,7 @@ function setPlatform(platformKey) {
   [signalOne, signalTwo, signalThree].forEach((signal, index) => {
     signal.textContent = scenario.signals[index];
   });
-  pigeonOverlay.classList.add("hidden");
-  pigeonOverlay.classList.add("compact");
-  pigeonOverlay.classList.remove("expanded");
-  pigeonGradePopout.setAttribute("aria-expanded", "false");
+  hidePigeonPopout();
 }
 
 platformTabs.forEach((tab) => {
@@ -160,24 +175,19 @@ perspectiveTabs.forEach((tab) => {
 
 triggerPigeon.addEventListener("click", () => {
   const scenario = platformScenarios[activePlatform];
-  pigeonOverlay.classList.remove("hidden");
-  pigeonOverlay.classList.add("compact");
-  pigeonOverlay.classList.remove("expanded");
-  pigeonGradePopout.setAttribute("aria-expanded", "false");
+  showPigeonPopout();
   actionStatus.textContent = scenario.triggered;
 });
 
 pigeonGradePopout.addEventListener("click", () => {
+  clearTimeout(pigeonPopoutTimer);
   pigeonOverlay.classList.remove("compact");
   pigeonOverlay.classList.add("expanded");
   pigeonGradePopout.setAttribute("aria-expanded", "true");
 });
 
 pigeonDrawerClose.addEventListener("click", () => {
-  pigeonOverlay.classList.add("hidden");
-  pigeonOverlay.classList.add("compact");
-  pigeonOverlay.classList.remove("expanded");
-  pigeonGradePopout.setAttribute("aria-expanded", "false");
+  hidePigeonPopout();
 });
 
 inlineShareTriggers.forEach((button) => {
@@ -190,10 +200,7 @@ resolutionButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const choice = button.textContent.trim();
     actionStatus.textContent = `User chose: ${choice}.`;
-    pigeonOverlay.classList.add("hidden");
-    pigeonOverlay.classList.add("compact");
-    pigeonOverlay.classList.remove("expanded");
-    pigeonGradePopout.setAttribute("aria-expanded", "false");
+    hidePigeonPopout();
   });
 });
 

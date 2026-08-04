@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -15,7 +15,6 @@
   <body>
     <header class="site-header">
       <a class="brand" href="#top" aria-label="PIGEON home">
-        <span class="brand-mark">✦</span>
         <span class="brand-title">PIGEON</span>
         <span class="brand-pill">Protocol</span>
       </a>
@@ -409,6 +408,7 @@
                 <aside
                   class="pigeon-overlay hidden"
                   id="pigeonOverlay"
+                  data-grade="c"
                   role="dialog"
                   aria-labelledby="overlayTitle"
                 >
@@ -758,26 +758,26 @@
           <h2>Designed for education, access, and healthier digital spaces.</h2>
         </div>
 
-        <div class="impact-grid">
-          <article>
-            <span class="impact-icon">4</span>
-            <h3>SDG 4</h3>
+        <div class="impact-grid impact-sdgs">
+          <article class="impact-card sdg-four">
+            <div class="impact-card-top"><span class="impact-icon">4</span><span class="sdg-tag">SDG 4</span></div>
+            <h3>Quality Education</h3>
             <p>
               Embeds media and AI literacy into daily platform behavior instead
               of separating it into occasional lessons.
             </p>
           </article>
-          <article>
-            <span class="impact-icon">10</span>
-            <h3>SDG 10</h3>
+          <article class="impact-card sdg-ten">
+            <div class="impact-card-top"><span class="impact-icon">10</span><span class="sdg-tag">SDG 10</span></div>
+            <h3>Reduced Inequalities</h3>
             <p>
               Offers lightweight credibility tools that can support communities
               with uneven access to digital governance and MIL resources.
             </p>
           </article>
-          <article>
-            <span class="impact-icon">16</span>
-            <h3>SDG 16</h3>
+          <article class="impact-card sdg-sixteen">
+            <div class="impact-card-top"><span class="impact-icon">16</span><span class="sdg-tag">SDG 16</span></div>
+            <h3>Peace, Justice &amp; Strong Institutions</h3>
             <p>
               Encourages transparent publishing, mindful sharing, and more
               accountable online information environments.

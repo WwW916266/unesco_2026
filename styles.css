@@ -3777,12 +3777,23 @@ p {
 }
 
 .impact-sdgs { gap: 0; border-top: 1px solid var(--line); }
-.impact-card { min-height: 278px; padding: 32px 28px; background: transparent; border: 0; border-right: 1px solid var(--line); border-radius: 0; box-shadow: none; }
+.impact-card {
+  display: flex;
+  min-height: 278px;
+  padding: 32px 28px;
+  flex-direction: column;
+  align-items: stretch;
+  background: transparent;
+  border: 0;
+  border-right: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+}
 .impact-card:last-child { border-right: 0; }
 .impact-card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 27px; }
 .impact-card .impact-icon { width: 50px; height: 50px; margin: 0; color: #ffffff; font-size: 0.92rem; border-radius: 50%; box-shadow: none; }
 .impact-card .sdg-tag { color: #7b95a4; font-size: 0.67rem; font-weight: 850; letter-spacing: 0.09em; }
-.impact-card h3 { margin: 0 0 11px; color: var(--ink); font-size: 1.58rem; line-height: 1.28; }
+.impact-card h3 { min-height: 2.56em; margin: 0 0 11px; color: var(--ink); font-size: 1.58rem; line-height: 1.28; }
 .impact-card p { margin: 0; color: #637e8d; font-size: 0.86rem; line-height: 1.7; }
 .sdg-four .impact-icon { background: linear-gradient(135deg, #df5265, #c53d56); }
 .sdg-ten .impact-icon { background: linear-gradient(135deg, #d85b8b, #b74378); }
@@ -3802,43 +3813,149 @@ p {
 
 .journey-grid {
   display: grid;
-  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1fr);
-  gap: 50px;
-  align-items: start;
+  grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1fr);
+  gap: clamp(44px, 7vw, 88px);
+  align-items: center;
+}
+
+.journey-grid h2 {
+  max-width: 640px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.35rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .journey-steps {
+  position: relative;
   display: grid;
-  gap: 14px;
+  gap: 16px;
+  border-top: 0;
+}
+
+.journey-steps::before {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  width: 1px;
+  content: "";
+  background: linear-gradient(180deg, rgba(2, 132, 199, 0.25), rgba(79, 70, 229, 0.25));
 }
 
 .step {
+  position: relative;
   display: grid;
-  grid-template-columns: 42px 1fr;
-  gap: 14px;
-  align-items: center;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.82);
-  border: 1px solid var(--line);
-  border-radius: 18px;
-  box-shadow: var(--soft-shadow);
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.86), rgba(248, 251, 252, 0.66)),
+    rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(203, 209, 208, 0.68);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(31, 41, 55, 0.07);
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
-.step span {
+.step:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 252, 0.78)),
+    rgba(255, 255, 255, 0.74);
+  border-color: rgba(22, 25, 27, 0.2);
+  box-shadow: 0 24px 60px rgba(31, 41, 55, 0.1);
+}
+
+.step-index {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding-left: 2px;
+}
+
+.step-number {
+  display: block;
+  width: auto;
+  height: auto;
+  color: #cbd5e1;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.15rem, 3.5vw, 3.1rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: transparent;
+  border-radius: 0;
+}
+
+.step-phase {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 8px;
+  color: #0369a1;
+  font-size: 0.6rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(224, 242, 254, 0.88);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  border-radius: 999px;
+}
+
+.consumer-phase .step-phase {
+  color: #4f46e5;
+  background: rgba(238, 242, 255, 0.9);
+  border-color: rgba(165, 180, 252, 0.52);
+}
+
+.step-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.step-icon {
   display: grid;
   width: 42px;
   height: 42px;
   place-items: center;
-  color: var(--white);
-  font-weight: 800;
-  background: #74b4d5;
-  border-radius: 14px;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(203, 209, 208, 0.8);
+  border-radius: 12px;
+}
+
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 850;
+  line-height: 1.25;
 }
 
 .step p {
   margin: 0;
-  color: var(--ink);
-  font-weight: 600;
+  color: #53606a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.58;
 }
 
 .site-footer {
@@ -4007,5 +4124,1781 @@ p {
   .signal-row:last-child {
     padding-bottom: 0;
     border-bottom: 0;
+  }
+}
+
+/* User Journey restored: polished glass timeline with phase separation. */
+.journey-grid {
+  grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1fr);
+  gap: clamp(44px, 7vw, 88px);
+  align-items: center;
+}
+
+.journey-grid h2 {
+  max-width: 640px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.35rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.journey-steps {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  border-top: 0;
+}
+
+.journey-steps::before {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  display: block;
+  width: 1px;
+  content: "";
+  background: linear-gradient(180deg, rgba(2, 132, 199, 0.25), rgba(79, 70, 229, 0.25));
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(248, 251, 252, 0.68)),
+    rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(203, 209, 208, 0.68);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(31, 41, 55, 0.07);
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 252, 0.8)),
+    rgba(255, 255, 255, 0.78);
+  border-color: rgba(22, 25, 27, 0.2);
+  box-shadow: 0 24px 60px rgba(31, 41, 55, 0.1);
+}
+
+.step-index {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.step-number {
+  display: block;
+  width: auto;
+  height: auto;
+  color: #cbd5e1;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.15rem, 3.5vw, 3.1rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: transparent;
+  border-radius: 0;
+}
+
+.step-phase {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 8px;
+  color: #0369a1;
+  font-size: 0.6rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(224, 242, 254, 0.9);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  border-radius: 999px;
+}
+
+.consumer-phase .step-phase {
+  color: #4f46e5;
+  background: rgba(238, 242, 255, 0.92);
+  border-color: rgba(165, 180, 252, 0.52);
+}
+
+.step-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.step-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(203, 209, 208, 0.8);
+  border-radius: 12px;
+}
+
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 850;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.step p {
+  max-width: 42ch;
+  margin: 0;
+  color: #53606a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .journey-grid {
+    gap: 32px;
+  }
+
+  .journey-steps::before {
+    left: 23px;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .step-index {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .step-body {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+}
+
+/* User Journey reference layout: editorial split title with numbered rule list. */
+.journey-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.58fr) minmax(0, 1fr);
+  gap: clamp(52px, 7vw, 104px);
+  align-items: start;
+}
+
+.journey-grid > div:first-child {
+  position: sticky;
+  top: 118px;
+}
+
+.journey-grid .eyebrow {
+  margin-bottom: clamp(22px, 3vw, 34px);
+}
+
+.journey-grid h2 {
+  max-width: 540px;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(3.55rem, 5.4vw, 5.85rem);
+  font-weight: 400;
+  line-height: 0.96;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.journey-steps {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(22, 25, 27, 0.16);
+}
+
+.journey-steps::before {
+  display: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: minmax(88px, 0.18fr) minmax(0, 1fr);
+  gap: clamp(26px, 4vw, 54px);
+  align-items: center;
+  min-height: clamp(112px, 10vw, 148px);
+  padding: 22px 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(22, 25, 27, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: border-color 160ms ease;
+}
+
+.step:hover {
+  transform: none;
+  background: transparent;
+  border-color: rgba(47, 129, 159, 0.38);
+  box-shadow: none;
+}
+
+.step > span {
+  display: block;
+  width: auto;
+  height: auto;
+  color: var(--ink);
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.85rem, 4.1vw, 4.35rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.step p {
+  max-width: 520px;
+  margin: 0;
+  color: #525a5f;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(1rem, 1.22vw, 1.22rem);
+  font-weight: 650;
+  line-height: 1.46;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .journey-grid > div:first-child {
+    position: static;
+  }
+
+  .journey-grid h2 {
+    max-width: 720px;
+    font-size: clamp(3rem, 9vw, 4.8rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .journey-grid {
+    gap: 30px;
+  }
+
+  .journey-grid .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .journey-grid h2 {
+    font-size: clamp(2.65rem, 12vw, 3.75rem);
+  }
+
+  .step {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 16px;
+    min-height: 96px;
+    padding: 18px 0;
+  }
+
+  .step > span {
+    font-size: clamp(2.25rem, 10vw, 3rem);
+  }
+
+  .step p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+}
+
+/* User Journey plain final: black text, fine rules, no cards or icons. */
+.journey-grid {
+  grid-template-columns: minmax(260px, 0.7fr) minmax(0, 1fr);
+  gap: clamp(44px, 7vw, 96px);
+  align-items: start;
+}
+
+.journey-grid h2 {
+  max-width: 640px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.25rem);
+  font-weight: 850;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.journey-steps {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.journey-steps::before {
+  display: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: minmax(64px, 0.18fr) minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: baseline;
+  padding: 24px 0 26px;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: none;
+}
+
+.step:hover {
+  transform: none;
+  background: transparent;
+  border-color: var(--line);
+  box-shadow: none;
+}
+
+.step > span {
+  display: block;
+  width: auto;
+  height: auto;
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2rem, 3.4vw, 2.95rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.step p {
+  max-width: 44ch;
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+.step-index,
+.step-body,
+.step-icon,
+.step-phase,
+.step-number {
+  all: unset;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .step {
+    grid-template-columns: 54px minmax(0, 1fr);
+    gap: 16px;
+    padding: 20px 0 22px;
+  }
+}
+
+/* User Journey clean final: minimal timeline, icons retained, no glass-card weight. */
+.journey-grid {
+  grid-template-columns: minmax(270px, 0.72fr) minmax(0, 1fr);
+  gap: clamp(46px, 7vw, 92px);
+  align-items: start;
+}
+
+.journey-grid h2 {
+  max-width: 650px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.25rem);
+  font-weight: 850;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.journey-steps {
+  position: relative;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+
+.journey-steps::before {
+  display: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 86px minmax(0, 1fr);
+  gap: clamp(18px, 3vw, 34px);
+  align-items: start;
+  padding: 24px 0 26px;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.step:hover {
+  transform: none;
+  background: transparent;
+  border-color: rgba(22, 25, 27, 0.32);
+  box-shadow: none;
+}
+
+.step-index {
+  display: grid;
+  gap: 9px;
+  align-content: start;
+}
+
+.step-number {
+  display: block;
+  color: #aeb7bd;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(1.95rem, 3.2vw, 2.75rem);
+  font-weight: 850;
+  line-height: 0.92;
+  letter-spacing: -0.04em;
+}
+
+.step-phase {
+  display: block;
+  width: auto;
+  min-height: 0;
+  padding: 0;
+  color: var(--blue-ink);
+  font-size: 0.58rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.consumer-phase .step-phase {
+  color: #4f5d8a;
+  background: transparent;
+  border: 0;
+}
+
+.step-body {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.step-icon {
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  color: #1f2933;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+.step-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.step h3 {
+  margin: 0 0 5px;
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.step p {
+  max-width: 44ch;
+  margin: 0;
+  color: #4f565a;
+  font-size: 0.94rem;
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: 34px;
+  }
+}
+
+@media (max-width: 560px) {
+  .step {
+    grid-template-columns: 1fr;
+    gap: 13px;
+    padding: 21px 0 23px;
+  }
+
+  .step-index {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: baseline;
+  }
+
+  .step-body {
+    grid-template-columns: 30px minmax(0, 1fr);
+  }
+
+  .step-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* User Journey final system: modern glass timeline with phase separation. */
+.journey-grid {
+  grid-template-columns: minmax(270px, 0.72fr) minmax(0, 1fr);
+  gap: clamp(46px, 7.5vw, 96px);
+  align-items: center;
+}
+
+.journey-grid h2 {
+  max-width: 650px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.35rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.journey-steps {
+  position: relative;
+  gap: 16px;
+  border-top: 0;
+}
+
+.journey-steps::before {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  width: 1px;
+  content: "";
+  background: linear-gradient(180deg, rgba(2, 132, 199, 0.28), rgba(79, 70, 229, 0.28));
+}
+
+.step {
+  position: relative;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(248, 251, 252, 0.68)),
+    rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(203, 209, 208, 0.68);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(31, 41, 55, 0.07);
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 252, 0.8)),
+    rgba(255, 255, 255, 0.78);
+  border-color: rgba(22, 25, 27, 0.2);
+  box-shadow: 0 24px 60px rgba(31, 41, 55, 0.1);
+}
+
+.step-index {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.step-number {
+  display: block;
+  width: auto;
+  height: auto;
+  color: #cbd5e1;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.15rem, 3.5vw, 3.1rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: transparent;
+  border-radius: 0;
+}
+
+.step-phase {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 8px;
+  color: #0369a1;
+  font-size: 0.6rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(224, 242, 254, 0.9);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  border-radius: 999px;
+}
+
+.consumer-phase .step-phase {
+  color: #4f46e5;
+  background: rgba(238, 242, 255, 0.92);
+  border-color: rgba(165, 180, 252, 0.52);
+}
+
+.step-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.step-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(203, 209, 208, 0.8);
+  border-radius: 12px;
+}
+
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 850;
+  line-height: 1.25;
+}
+
+.step p {
+  max-width: 42ch;
+  margin: 0;
+  color: #53606a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .journey-grid {
+    gap: 32px;
+  }
+
+  .journey-steps::before {
+    left: 23px;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .step-index {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .step-body {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+}
+
+/* Premium comfort pass: quieter rhythm, cleaner scan paths, softer reading density. */
+:root {
+  --page-bg: #f6f6f2;
+  --surface-flat: #fbfbf8;
+  --line-soft: rgba(22, 25, 27, 0.14);
+  --line-strong: rgba(22, 25, 27, 0.28);
+  --text-soft: #4f565a;
+}
+
+html {
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  background: var(--page-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: #ffffff;
+  background: var(--ink);
+}
+
+.site-header {
+  width: min(1360px, calc(100% - clamp(28px, 9vw, 160px)));
+  padding: 13px 18px;
+  background: rgba(246, 246, 242, 0.94);
+  border-color: var(--line-soft);
+}
+
+.site-header:hover {
+  border-color: var(--line-strong);
+}
+
+.brand-title {
+  letter-spacing: 0.1em;
+}
+
+.site-nav a {
+  position: relative;
+  border-radius: 0;
+}
+
+.site-nav a::after {
+  position: absolute;
+  right: 0;
+  bottom: 4px;
+  left: 0;
+  height: 1px;
+  content: "";
+  background: currentColor;
+  opacity: 0;
+  transform: scaleX(0.55);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.site-nav a:hover {
+  color: var(--ink);
+  transform: none;
+}
+
+.site-nav a:hover::after {
+  opacity: 0.55;
+  transform: scaleX(1);
+}
+
+.header-cta,
+.button.primary,
+.publish-trigger {
+  background: #202020;
+}
+
+.header-cta:hover,
+.button.primary:hover,
+.publish-trigger:hover {
+  background: #111111;
+  box-shadow: none;
+  transform: none;
+}
+
+.button:hover,
+.platform-tab:hover,
+.perspective-tab:hover,
+.creator-check-grid button:hover,
+.reflection-options button:hover {
+  transform: none;
+}
+
+.section,
+.section-band {
+  padding-top: clamp(88px, 10vw, 148px);
+  padding-bottom: clamp(88px, 10vw, 148px);
+  border-top-color: var(--line-soft);
+}
+
+.section-heading:not(.narrow) {
+  column-gap: clamp(28px, 5vw, 78px);
+}
+
+.section-heading:not(.narrow) > h2 {
+  text-wrap: balance;
+}
+
+.section-heading:not(.narrow) > p:last-child,
+.section-heading.narrow > p:last-child,
+.hero-text,
+.problem-card p,
+.flow-card p,
+.impact-card p,
+.label-notes article p,
+.tier-rules li,
+.step p {
+  color: var(--text-soft);
+}
+
+h1,
+h2 {
+  letter-spacing: 0;
+}
+
+h3 {
+  text-wrap: balance;
+}
+
+.hero {
+  min-height: min(860px, calc(100vh - 70px));
+  padding-top: clamp(104px, 12vw, 168px);
+  padding-bottom: clamp(92px, 10vw, 140px);
+  background:
+    linear-gradient(90deg, #f6f6f2 0 58%, #eef3f2 100%);
+}
+
+.hero-copy {
+  max-width: 920px;
+}
+
+.hero-text {
+  max-width: 680px;
+  font-size: clamp(1.06rem, 1.35vw, 1.2rem);
+}
+
+.hero-actions {
+  margin-top: 38px;
+}
+
+.hero-proof {
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 34px;
+}
+
+.problem-grid,
+.flow,
+.label-layout,
+.tier-layout,
+.impact-sdgs,
+.journey-steps {
+  border-color: var(--line-strong);
+}
+
+.problem-card,
+.flow-card,
+.impact-card,
+.trust-label,
+.label-notes article,
+.tier-progress article,
+.tier-rules li,
+.step {
+  border-color: var(--line-soft);
+}
+
+.problem-card:hover,
+.flow-card:hover,
+.impact-grid article:hover {
+  background: rgba(236, 238, 235, 0.58);
+}
+
+.problem-icon,
+.solution-icon,
+.principle-icon {
+  color: var(--ink);
+  background: transparent;
+  border-color: var(--line-strong);
+}
+
+.solution-flow .flow-card {
+  min-height: 344px;
+}
+
+.solution-features {
+  gap: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+}
+
+.solution-features li {
+  color: #3f474b;
+}
+
+.simulation-stage {
+  padding-top: 30px;
+  border-top-color: var(--line-strong);
+}
+
+.social-mockup,
+.creator-editor,
+.trust-label {
+  background-color: var(--surface-flat);
+  border-color: var(--line-soft);
+}
+
+.mockup-header {
+  border-bottom-color: var(--line-soft);
+}
+
+.creator-editor,
+.social-mockup {
+  border-radius: 6px;
+}
+
+.creator-workspace {
+  gap: 18px;
+}
+
+.creator-pigeon,
+.draft-card,
+.creator-preview {
+  background: #ffffff;
+  border-color: var(--line-soft);
+}
+
+.creator-check-grid button {
+  border-color: var(--line-soft);
+}
+
+.creator-check-grid button:hover {
+  background: #f4f5f2;
+  border-color: var(--line-strong);
+}
+
+.label-layout,
+.tier-layout {
+  background: rgba(251, 251, 248, 0.45);
+}
+
+.tier-name-line {
+  row-gap: 3px;
+}
+
+.tier-account strong {
+  font-size: 1rem;
+}
+
+.tier-progress article.active {
+  border-top-color: var(--ink);
+}
+
+.journey-grid {
+  gap: clamp(52px, 8vw, 112px);
+}
+
+.step {
+  padding-top: 28px;
+  padding-bottom: 30px;
+}
+
+.step span {
+  color: #202020;
+}
+
+.step p {
+  max-width: 42ch;
+}
+
+.impact-card h3 {
+  max-width: 18ch;
+}
+
+.site-footer {
+  background: var(--page-bg);
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    width: min(100% - 28px, 720px);
+  }
+
+  .section,
+  .section-band {
+    padding-right: clamp(22px, 6vw, 48px);
+    padding-left: clamp(22px, 6vw, 48px);
+  }
+
+  .hero {
+    min-height: auto;
+  }
+
+  .tier-rules {
+    border-top: 1px solid var(--line-soft);
+    border-left: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .section,
+  .section-band {
+    padding-top: 72px;
+    padding-bottom: 72px;
+  }
+
+  .site-header {
+    width: calc(100% - 18px);
+    padding: 10px 11px;
+  }
+
+  .site-nav {
+    gap: 18px;
+  }
+
+  .button {
+    width: 100%;
+  }
+
+  .hero-actions {
+    display: grid;
+  }
+
+  .phone-preview,
+  .desktop-card,
+  .trust-label,
+  .social-mockup,
+  .creator-editor,
+  .content-media,
+  .problem-grid article,
+  .flow-card,
+  .label-notes article,
+  .impact-grid article {
+    border-radius: 6px;
+  }
+
+  .journey-grid {
+    gap: 34px;
+  }
+
+  .step p {
+    font-size: 1rem;
+  }
+}
+
+/* Editorial UI refresh: stronger hierarchy, calmer controls, clearer reading flow. */
+:root {
+  --focus: 0 0 0 3px rgba(22, 25, 27, 0.16);
+}
+
+body {
+  background: #f6f6f2;
+}
+
+.section,
+.section-band {
+  position: relative;
+  border-top: 1px solid rgba(203, 209, 208, 0.72);
+}
+
+.section:first-of-type {
+  border-top: 0;
+}
+
+.section-heading:not(.narrow) {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(22px, 4vw, 64px);
+  max-width: none;
+  margin-bottom: clamp(38px, 5vw, 64px);
+  align-items: end;
+}
+
+.section-heading:not(.narrow) > .eyebrow,
+.section-heading:not(.narrow) > .problem-eyebrow {
+  grid-column: 1 / -1;
+  margin-bottom: 16px;
+}
+
+.section-heading:not(.narrow) > h2 {
+  grid-column: 1 / span 8;
+  max-width: 900px;
+  margin-bottom: 0;
+}
+
+.section-heading:not(.narrow) > p:last-child {
+  grid-column: 9 / -1;
+  max-width: 360px;
+  margin: 0 0 4px;
+  font-size: 0.94rem;
+  line-height: 1.72;
+}
+
+.section-heading.narrow {
+  margin-bottom: clamp(36px, 5vw, 54px);
+}
+
+.section-heading.narrow > p:last-child {
+  max-width: 660px;
+  font-size: 0.98rem;
+}
+
+.tier-section {
+  background: #f4f5f2;
+}
+
+.tier-layout {
+  border-top-color: #bfc5c3;
+  border-bottom-color: #bfc5c3;
+}
+
+.tier-profile,
+.tier-rules {
+  padding: clamp(24px, 3vw, 34px) clamp(20px, 2.6vw, 30px);
+}
+
+.tier-rules {
+  border-left-color: #bfc5c3;
+}
+
+.tier-avatar {
+  display: block;
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  overflow: hidden;
+  color: #ffffff;
+  background: #242424;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.tier-avatar img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  border-radius: inherit;
+  filter: saturate(0.9) contrast(1.02);
+}
+
+.id-badge {
+  gap: 5px;
+  padding: 0;
+  color: #4b5563;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.tier-progress {
+  border-top: 1px solid #d1d5d2;
+}
+
+.tier-progress article {
+  min-height: 170px;
+  padding: 15px 12px 12px;
+  background: transparent;
+  border-right-color: #d1d5d2;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.tier-progress article.active {
+  background: transparent;
+  border-top: 2px solid var(--blue-deep);
+  border-right-color: #d1d5d2;
+  box-shadow: none;
+}
+
+.tier-rules ul {
+  gap: 0;
+  margin-top: 20px;
+  border-top: 1px solid #d1d5d2;
+}
+
+.tier-rules li {
+  padding: 15px 0;
+  color: #3f484c;
+  font-size: 0.84rem;
+  font-weight: 650;
+  line-height: 1.5;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #d1d5d2;
+  border-radius: 0;
+}
+
+.eyebrow,
+.problem-eyebrow,
+.solution-eyebrow,
+.stage-badge,
+.problem-kicker,
+.sdg-tag {
+  letter-spacing: 0.16em;
+}
+
+.hero {
+  border-top: 0;
+  background:
+    linear-gradient(90deg, rgba(246, 246, 242, 0.96) 0 63%, rgba(239, 245, 245, 0.74) 100%);
+}
+
+.hero-copy {
+  position: relative;
+}
+
+.hero-copy::after {
+  position: absolute;
+  top: 0.7rem;
+  right: -8vw;
+  width: min(31vw, 360px);
+  height: 1px;
+  content: "";
+  background: var(--blue-deep);
+  opacity: 0.48;
+}
+
+.hero-text {
+  max-width: 650px;
+  color: #50585d;
+}
+
+.hero-proof {
+  gap: 0;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+
+.hero-proof span {
+  padding-right: 16px;
+  margin-right: 16px;
+  border-right: 1px solid var(--line);
+}
+
+.hero-proof span:last-child {
+  padding-right: 0;
+  margin-right: 0;
+  border-right: 0;
+}
+
+.button {
+  min-height: 46px;
+  padding-inline: 18px;
+  font-size: 0.76rem;
+  letter-spacing: 0.03em;
+}
+
+.button.secondary {
+  border-color: #9fa6a5;
+}
+
+.button.secondary:hover {
+  color: var(--ink);
+  background: #eceeeb;
+  border-color: var(--ink);
+}
+
+.problem-grid,
+.flow,
+.impact-grid {
+  align-items: stretch;
+}
+
+.problem-card,
+.flow-card,
+.impact-card {
+  min-width: 0;
+  padding: clamp(24px, 3vw, 34px) clamp(20px, 2.6vw, 30px);
+}
+
+.problem-card h3,
+.flow-card h3,
+.impact-card h3 {
+  max-width: 16ch;
+}
+
+.problem-card p,
+.flow-card p,
+.impact-card p {
+  max-width: 34ch;
+}
+
+.problem-card-footer {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+.solution-flow .flow-card {
+  min-height: 330px;
+}
+
+.solution-features {
+  margin-top: auto;
+}
+
+.simulation-section {
+  background: #f6f6f2;
+}
+
+.simulation-controls {
+  margin-bottom: 34px;
+}
+
+.perspective-tab,
+.platform-tab {
+  min-height: 40px;
+}
+
+.simulation-stage {
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+}
+
+.site-footer {
+  border-top-color: var(--line);
+}
+
+@media (max-width: 900px) {
+  .section-heading:not(.narrow) {
+    display: block;
+  }
+
+  .section-heading:not(.narrow) > p:last-child {
+    max-width: 620px;
+    margin-top: 18px;
+  }
+
+  .hero-copy::after {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .section,
+  .section-band {
+    border-top-color: rgba(203, 209, 208, 0.82);
+  }
+
+  .section-heading:not(.narrow) > h2 {
+    font-size: clamp(2.45rem, 12vw, 3.25rem);
+  }
+
+  .hero {
+    background: #f6f6f2;
+  }
+
+  .hero-proof {
+    display: grid;
+    gap: 10px;
+  }
+
+  .hero-proof span {
+    padding: 0 0 10px;
+    margin: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero-proof span:last-child {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+
+  .step {
+    grid-template-columns: 52px 1fr;
+    gap: 16px;
+    padding: 20px 0 22px;
+  }
+
+  .problem-card,
+  .flow-card,
+  .impact-card {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .problem-card:last-child,
+  .flow-card:last-child,
+  .impact-card:last-child {
+    border-bottom: 0;
+  }
+}
+
+/* User Journey restored EOF: polished glass timeline with phase separation. */
+.journey-grid {
+  grid-template-columns: minmax(270px, 0.78fr) minmax(0, 1fr);
+  gap: clamp(44px, 7vw, 88px);
+  align-items: center;
+}
+
+.journey-grid h2 {
+  max-width: 640px;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.55rem, 4.6vw, 4.35rem);
+  font-weight: 850;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.journey-steps {
+  position: relative;
+  display: grid;
+  gap: 16px;
+  border-top: 0;
+}
+
+.journey-steps::before {
+  position: absolute;
+  top: 30px;
+  bottom: 30px;
+  left: 30px;
+  display: block;
+  width: 1px;
+  content: "";
+  background: linear-gradient(180deg, rgba(2, 132, 199, 0.25), rgba(79, 70, 229, 0.25));
+}
+
+.step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  align-items: stretch;
+  padding: 18px;
+  overflow: hidden;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.88), rgba(248, 251, 252, 0.68)),
+    rgba(255, 255, 255, 0.64);
+  border: 1px solid rgba(203, 209, 208, 0.68);
+  border-radius: 14px;
+  box-shadow: 0 18px 48px rgba(31, 41, 55, 0.07);
+  backdrop-filter: blur(16px);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.step:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 251, 252, 0.8)),
+    rgba(255, 255, 255, 0.78);
+  border-color: rgba(22, 25, 27, 0.2);
+  box-shadow: 0 24px 60px rgba(31, 41, 55, 0.1);
+}
+
+.step-index {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.step-number {
+  display: block;
+  width: auto;
+  height: auto;
+  color: #cbd5e1;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(2.15rem, 3.5vw, 3.1rem);
+  font-weight: 850;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  background: transparent;
+  border-radius: 0;
+}
+
+.step-phase {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 24px;
+  align-items: center;
+  padding: 0 8px;
+  color: #0369a1;
+  font-size: 0.6rem;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  background: rgba(224, 242, 254, 0.9);
+  border: 1px solid rgba(125, 211, 252, 0.45);
+  border-radius: 999px;
+}
+
+.consumer-phase .step-phase {
+  color: #4f46e5;
+  background: rgba(238, 242, 255, 0.92);
+  border-color: rgba(165, 180, 252, 0.52);
+}
+
+.step-body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  gap: 14px;
+  align-items: start;
+}
+
+.step-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  color: #0f172a;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(203, 209, 208, 0.8);
+  border-radius: 12px;
+}
+
+.step-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.step h3 {
+  margin: 0 0 6px;
+  color: #0f172a;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1.02rem;
+  font-weight: 850;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.step p {
+  max-width: 42ch;
+  margin: 0;
+  color: #53606a;
+  font-size: 0.92rem;
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+}
+
+@media (max-width: 560px) {
+  .journey-grid {
+    gap: 32px;
+  }
+
+  .journey-steps::before {
+    left: 23px;
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .step-index {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .step-body {
+    grid-template-columns: 38px minmax(0, 1fr);
+  }
+
+  .step-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+  }
+}
+
+/* User Journey reference final: editorial split title with numbered rule list. */
+.journey-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.64fr) minmax(0, 1fr);
+  gap: clamp(38px, 6vw, 78px);
+  align-items: start;
+}
+
+.journey-grid > div:first-child {
+  position: sticky;
+  top: 118px;
+}
+
+.journey-grid .eyebrow {
+  margin-bottom: 18px;
+}
+
+.journey-grid h2 {
+  max-width: 620px;
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.8rem, 4.8vw, 4.7rem);
+  font-weight: 400;
+  line-height: 1.01;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.journey-steps {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid rgba(22, 25, 27, 0.16);
+}
+
+.journey-steps::before {
+  display: none;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.14fr) minmax(0, 1fr);
+  gap: clamp(20px, 3vw, 38px);
+  align-items: center;
+  min-height: clamp(86px, 7.5vw, 112px);
+  padding: 18px 0;
+  overflow: visible;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(22, 25, 27, 0.14);
+  border-radius: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+  transition: border-color 160ms ease;
+}
+
+.step:hover {
+  transform: none;
+  background: transparent;
+  border-color: rgba(47, 129, 159, 0.38);
+  box-shadow: none;
+}
+
+.step > span {
+  display: block;
+  width: auto;
+  height: auto;
+  color: var(--ink);
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.15rem, 3vw, 3.15rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+
+.step p {
+  max-width: 500px;
+  margin: 0;
+  color: #525a5f;
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(0.94rem, 1.05vw, 1.08rem);
+  font-weight: 650;
+  line-height: 1.46;
+}
+
+@media (max-width: 900px) {
+  .journey-grid {
+    grid-template-columns: 1fr;
+    gap: 42px;
+  }
+
+  .journey-grid > div:first-child {
+    position: static;
+  }
+
+  .journey-grid h2 {
+    max-width: 720px;
+    font-size: clamp(2.8rem, 4.8vw, 4.7rem);
+  }
+}
+
+@media (max-width: 560px) {
+  .journey-grid {
+    gap: 30px;
+  }
+
+  .journey-grid .eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .journey-grid h2 {
+    font-size: clamp(2.45rem, 12vw, 3.25rem);
+  }
+
+  .step {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    min-height: 78px;
+    padding: 16px 0;
+  }
+
+  .step > span {
+    font-size: clamp(1.9rem, 8vw, 2.45rem);
+  }
+
+  .step p {
+    font-size: 0.94rem;
+    line-height: 1.5;
   }
 }

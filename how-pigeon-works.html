@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>How PIGEON Works | Product Simulation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="PIGEON home">
+        <span class="brand-title">PIGEON</span>
+        <span class="brand-pill">Protocol</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="what-is-pigeon.html">What Is PIGEON</a>
+        <a href="how-pigeon-works.html" aria-current="page">How PIGEON Works</a>
+        <a href="highlight.html">Highlight</a>
+        <a href="impact-sdg.html">Impact & SDG</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section id="simulation" class="section simulation-section" data-perspective="viewer">
+        <div class="section-heading">
+          <p class="eyebrow">Product simulation</p>
+          <h2>Experience PIGEON inside familiar social moments.</h2>
+          <p>
+            This is not a real browser plugin. It is a guided prototype that
+            shows how PIGEON could appear inside different platforms when people
+            are about to publish, repost, or forward content.
+          </p>
+        </div>
+
+        <div class="simulation-controls">
+          <div class="perspective-tabs" aria-label="Choose simulation perspective" role="tablist">
+          <button class="perspective-tab active" type="button" data-perspective="viewer" role="tab" aria-selected="true">
+            <span class="control-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></span><span>Viewer Experience</span>
+          </button>
+          <button class="perspective-tab" type="button" data-perspective="creator" role="tab" aria-selected="false">
+            <span class="control-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg></span><span>Creator Experience</span>
+          </button>
+          </div>
+
+          <div class="platform-tabs" aria-label="Choose a simulated platform">
+          <button class="platform-tab active platform-tiktok" type="button" data-platform="tiktok">
+            <b aria-hidden="true">♪</b><span>TikTok</span>
+          </button>
+          <button class="platform-tab platform-facebook" type="button" data-platform="facebook">
+            <b aria-hidden="true">f</b><span>Facebook</span>
+          </button>
+          <button class="platform-tab platform-xiaohongshu" type="button" data-platform="xiaohongshu">
+            <b aria-hidden="true">小</b><span>XiaoHongShu</span>
+          </button>
+          <button class="platform-tab platform-instagram" type="button" data-platform="instagram">
+            <b aria-hidden="true">◎</b><span>Instagram</span>
+          </button>
+          </div>
+        </div>
+
+        <div class="simulation-stage" data-platform-view="tiktok">
+          <article class="social-mockup" aria-live="polite">
+            <div class="mockup-header">
+              <div>
+                <span class="platform-dot"></span>
+                <strong id="platformName">TikTok</strong>
+              </div>
+              <span id="platformMoment">Short-video feed</span>
+            </div>
+
+            <div class="content-card">
+              <div class="content-media" id="contentMedia">
+                <div class="tiktok-topbar" aria-hidden="true">
+                  <span>Following</span>
+                  <strong>For You</strong>
+                </div>
+                <span id="contentMediaLabel">Video Preview</span>
+                <div class="video-actions">
+                  <button type="button" aria-label="Like this video">
+                    <span>♡</span>
+                    <small>24.8K</small>
+                  </button>
+                  <button type="button" aria-label="Open comments">
+                    <span>◌</span>
+                    <small>1,204</small>
+                  </button>
+                  <button
+                    class="inline-share-trigger"
+                    type="button"
+                    aria-label="Share this video"
+                  >
+                    <span>↗</span>
+                    <small>Share</small>
+                  </button>
+                </div>
+                <div class="tiktok-caption">
+                  <strong id="tiktokCreator">@quickupdate</strong>
+                  <p id="tiktokText">Everyone is saying this new rule starts tomorrow.</p>
+                  <span id="tiktokMeta">♪ Original sound · trending update</span>
+                </div>
+                <div class="tiktok-bottomnav" aria-hidden="true">
+                  <span>Home</span>
+                  <span>Discover</span>
+                  <strong>+</strong>
+                  <span>Inbox</span>
+                  <span>Profile</span>
+                </div>
+                <div class="facebook-ui" aria-hidden="true">
+                  <div class="fb-topbar">
+                    <div class="fb-brand">f</div>
+                    <div class="fb-search">Search Facebook</div>
+                    <div class="fb-icons">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                  </div>
+                  <div class="fb-feed">
+                    <div class="fb-composer">
+                      <div class="fb-avatar">N</div>
+                      <span>What's on your mind?</span>
+                    </div>
+                    <article class="fb-post">
+                      <div class="fb-post-top">
+                        <div class="fb-avatar">G</div>
+                        <div>
+                          <strong id="facebookCreator">Neighborhood Updates</strong>
+                          <p id="facebookMeta">Community group · 12 min</p>
+                        </div>
+                      </div>
+                      <p class="fb-post-text" id="facebookText">
+                        A friend warned that this product is unsafe. Please
+                        share to protect every family.
+                      </p>
+                      <div class="fb-post-media" id="facebookMedia">Community warning preview</div>
+                      <div class="fb-engagement">
+                        <span>1.8K reactions</span>
+                        <span>436 comments</span>
+                      </div>
+                      <div class="fb-actions">
+                        <button type="button">Like</button>
+                        <button type="button">Comment</button>
+                        <button
+                          class="inline-share-trigger"
+                          type="button"
+                          aria-label="Share this Facebook post"
+                        >
+                          Share
+                        </button>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+                <div class="instagram-ui" aria-hidden="true">
+                  <div class="ig-topbar">
+                    <strong>Instagram</strong>
+                    <div class="ig-top-icons">
+                      <span>♡</span>
+                      <span>↗</span>
+                    </div>
+                  </div>
+                  <div class="ig-stories">
+                    <div><span></span><small>Your story</small></div>
+                    <div><span></span><small>newsroom</small></div>
+                    <div><span></span><small>visualdigest</small></div>
+                    <div><span></span><small>daily</small></div>
+                  </div>
+                  <article class="ig-post">
+                    <div class="ig-post-top">
+                      <div class="ig-avatar"></div>
+                      <div>
+                        <strong id="instagramCreator">@visualdigest</strong>
+                        <p id="instagramMeta">Story repost · edited image</p>
+                      </div>
+                      <span>•••</span>
+                    </div>
+                    <div class="ig-media">
+                      <div class="ig-story-pill" id="instagramMedia">Story preview</div>
+                      <p id="instagramText">This image proves what really happened. Repost if you care.</p>
+                    </div>
+                    <div class="ig-actions">
+                      <button type="button">♡</button>
+                      <button type="button">◌</button>
+                      <button
+                        class="inline-share-trigger"
+                        type="button"
+                        aria-label="Repost this Instagram story"
+                      >
+                        ↗
+                      </button>
+                    </div>
+                    <div class="ig-caption">
+                      <strong id="instagramCaptionCreator">@visualdigest</strong>
+                      <span id="instagramCaptionText">Image context matters before resharing.</span>
+                    </div>
+                    <div class="ig-repost-row">
+                      <button class="inline-share-trigger" type="button">
+                        Repost story
+                      </button>
+                    </div>
+                  </article>
+                  <div class="ig-bottomnav" aria-hidden="true">
+                    <span>⌂</span>
+                    <span>⌕</span>
+                    <span>□</span>
+                    <span>♡</span>
+                    <span>○</span>
+                  </div>
+                </div>
+                <div class="xhs-ui" aria-hidden="true">
+                  <div class="xhs-topbar">
+                    <button type="button" aria-label="Back">‹</button>
+                    <div class="xhs-profile">
+                      <span></span>
+                      <strong id="xhsCreator">AI Watch Daily</strong>
+                    </div>
+                    <button class="xhs-follow" type="button">Follow</button>
+                    <button
+                      class="xhs-share inline-share-trigger"
+                      type="button"
+                      aria-label="Share this Xiaohongshu post"
+                    >
+                      ↗
+                    </button>
+                  </div>
+                  <div class="xhs-image-area"></div>
+                  <div class="xhs-content">
+                    <h3 id="xhsTitle">
+                      Breaking: viral image shows smoke over downtown after sudden explosion
+                    </h3>
+                    <p id="xhsText">
+                      Just saw this everywhere. People nearby say roads are blocked
+                      and emergency teams are arriving. Share this so others know
+                      what is happening before it gets removed.
+                    </p>
+                  </div>
+                  <div class="xhs-actionbar">
+                    <div class="xhs-comment-input">✎ Say something</div>
+                    <button type="button" aria-label="Like this Xiaohongshu note">
+                      ♡
+                    </button>
+                    <button type="button" aria-label="Comment on this Xiaohongshu note">
+                      ◌
+                    </button>
+                    <button
+                      class="xhs-share-action inline-share-trigger"
+                      type="button"
+                      aria-label="Share this Xiaohongshu note"
+                    >
+                      ↗
+                    </button>
+                  </div>
+                </div>
+                <aside
+                  class="pigeon-overlay hidden"
+                  id="pigeonOverlay"
+                  data-grade="c"
+                  role="dialog"
+                  aria-labelledby="overlayTitle"
+                >
+                  <div class="pigeon-backdrop"></div>
+                  <button
+                    class="pigeon-grade-popout"
+                    id="pigeonGradePopout"
+                    type="button"
+                    aria-expanded="false"
+                  >
+                    <span class="mini-grade">C</span>
+                    <span>
+                      <strong id="popoutGradeText">Info-Grade C</strong>
+                      <small id="popoutGradeSummary">No official source found</small>
+                    </span>
+                    <span class="popout-arrow">›</span>
+                  </button>
+                  <div class="pigeon-modal">
+                    <div class="overlay-top">
+                      <div>
+                        <strong id="overlayTitle">PIGEON Transparency Check</strong>
+                        <p id="overlaySubtitle">Pause before sharing</p>
+                      </div>
+                      <button
+                        class="drawer-close"
+                        id="pigeonDrawerClose"
+                        type="button"
+                        aria-label="Collapse PIGEON panel"
+                      >
+                        ×
+                      </button>
+                    </div>
+
+                    <div class="info-grade-card" aria-label="Info-Grade transparency rating">
+                      <div class="info-grade-top">
+                        <span>Info-Grade</span>
+                        <strong>Transparency Rating</strong>
+                      </div>
+                      <div class="grade-scale">
+                        <span class="grade-a" data-grade-letter="a">A</span>
+                        <span class="grade-b" data-grade-letter="b">B</span>
+                        <span class="grade-c active" data-grade-letter="c">C</span>
+                        <span class="grade-d" data-grade-letter="d">D</span>
+                      </div>
+                      <div class="grade-detail">
+                        <div>
+                          <span>Source</span>
+                          <strong id="signalOne">Source gap</strong>
+                        </div>
+                        <div>
+                          <span>Urgency</span>
+                          <strong id="signalTwo">High urgency</strong>
+                        </div>
+                        <div>
+                          <span>Context</span>
+                          <strong id="signalThree">Context needed</strong>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="reflection-card">
+                      <div>
+                        <strong>Notice: No official news source found.</strong>
+                        <p id="reflectionQuestion">
+                          Think before you share. Can you check where this claim came from?
+                        </p>
+                      </div>
+                    </div>
+
+                    <div class="reflection-options">
+                      <button class="resolution-button primary" type="button">
+                        <span>✓</span> Add Context & Share
+                      </button>
+                      <button class="resolution-button danger" type="button">
+                        <span>↺</span> Reconsider & Cancel Sharing
+                      </button>
+                      <button class="resolution-button bypass" type="button">
+                        Continue and Share As-Is
+                      </button>
+                    </div>
+                  </div>
+                </aside>
+              </div>
+            </div>
+
+            <div class="action-status" id="actionStatus">
+              Choose a platform, then use its main action to trigger PIGEON.
+            </div>
+            <div class="social-actions">
+              <button class="share-button" id="triggerPigeon" type="button">
+                Share
+              </button>
+            </div>
+          </article>
+
+          <article class="creator-mockup" aria-live="polite">
+            <div class="creator-editor">
+              <div class="creator-toolbar">
+                <div>
+                  <span class="brand-mark small">P</span>
+                  <div><strong>Creator Publishing Studio</strong><small>PIGEON assist active</small></div>
+                </div>
+                <div class="creator-steps" aria-hidden="true">
+                  <span class="active">Draft</span>
+                  <span>Evidence</span>
+                  <span>Publish</span>
+                </div>
+                <button class="publish-trigger" id="publishTrigger" type="button">
+                  Publish post <span aria-hidden="true">→</span>
+                </button>
+              </div>
+
+              <div class="creator-workspace">
+                <div class="draft-card">
+                  <div class="draft-card-top">
+                    <label for="creatorDraft">Post caption</label>
+                    <span>Auto-saved just now</span>
+                  </div>
+                  <div class="creator-copy" id="creatorCopy">
+                    <span class="urgency-flag">Huge update:</span> this AI image proves the downtown explosion happened today. <span class="share-flag">Everyone should share it before it disappears.</span>
+                  </div>
+                  <div class="creator-preview">
+                    <div class="preview-media">
+                      <span>AI image preview</span>
+                    </div>
+                    <div>
+                      <strong>@citysignal <em class="ai-media-mark hidden" id="aiMediaMark">AI generated</em></strong>
+                      <p>Breaking visual update · public post</p>
+                    </div>
+                  </div>
+                  <div class="draft-tools">
+                    <span class="issue-source" id="sourceIssue">No source cited</span>
+                    <span class="issue-ai" id="aiIssue">AI disclosure missing</span>
+                    <span class="issue-urgency" id="urgencyIssue">High urgency language</span>
+                  </div>
+                </div>
+
+                <aside class="creator-pigeon" id="creatorPigeon">
+                  <div class="creator-assist-top">
+                    <span class="brand-mark small">P</span>
+                    <div>
+                      <strong>PIGEON creator check</strong>
+                      <p>Improve credibility before publishing</p>
+                    </div>
+                    <span>Active</span>
+                  </div>
+                  <div class="creator-score">
+                    <div><span>Publishing readiness</span><strong id="creatorReadiness">Needs context</strong></div>
+                    <b id="creatorProgress">10%</b>
+                  </div>
+                  <div class="creator-meter" aria-label="Publishing readiness"><i id="creatorMeter"></i></div>
+                  <p class="creator-suggestion-label">Suggested improvements</p>
+                  <div class="creator-check-grid">
+                    <button type="button" id="creatorSourceAction"><span class="creator-action-icon">↗</span><span>Add primary source link</span><em>+ Source</em></button>
+                    <button type="button" id="creatorAiAction"><span class="creator-action-icon">✦</span><span>Mark AI media usage</span><em>+ Tag</em></button>
+                    <button type="button" id="creatorToneAction"><span class="creator-action-icon">~</span><span>Soften emotional urgency</span><em>Auto-fix</em></button>
+                  </div>
+                  <div class="creator-tier-line">
+                    <span>Trust tier progress</span>
+                    <div class="creator-tier-steps" aria-label="Trust tier progress">
+                      <span class="creator-tier-stage active"><span class="tier-icon nest" aria-hidden="true"><span></span></span></span>
+                      <span class="creator-tier-stage"><span class="tier-icon egg" aria-hidden="true"><span></span></span></span>
+                      <span class="creator-tier-stage"><span class="tier-icon young-bird" aria-hidden="true"><span></span></span></span>
+                      <span class="creator-tier-stage"><span class="tier-icon full-bird" aria-hidden="true"><span></span></span></span>
+                    </div>
+                    <strong id="creatorTierStatus">Level 1: Nest</strong>
+                  </div>
+                </aside>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+    </main>
+
+    <footer class="site-footer">
+      <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
+    </footer>
+
+
+    <script src="script.js?v=20260805-random-cases"></script>
+  </body>
+</html>

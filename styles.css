@@ -4951,8 +4951,17 @@ body {
   transform: none;
 }
 
+.site-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
 .site-nav a:hover::after {
   opacity: 0.55;
+  transform: scaleX(1);
+}
+
+.site-nav a[aria-current="page"]::after {
+  opacity: 0.85;
   transform: scaleX(1);
 }
 
@@ -5472,6 +5481,16 @@ body {
 .flow-card h3,
 .impact-card h3 {
   max-width: 16ch;
+}
+
+.problem-card h3 {
+  max-width: none;
+  white-space: nowrap;
+}
+
+.solution-card h3 {
+  max-width: 20ch;
+  white-space: nowrap;
 }
 
 .problem-card p,

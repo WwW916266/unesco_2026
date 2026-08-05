@@ -248,9 +248,9 @@
                   </button>
                 </div>
                 <div class="tiktok-caption">
-                  <strong>@quickupdate</strong>
-                  <p>Everyone is saying this new rule starts tomorrow.</p>
-                  <span>♪ Original sound · trending update</span>
+                  <strong id="tiktokCreator">@quickupdate</strong>
+                  <p id="tiktokText">Everyone is saying this new rule starts tomorrow.</p>
+                  <span id="tiktokMeta">♪ Original sound · trending update</span>
                 </div>
                 <div class="tiktok-bottomnav" aria-hidden="true">
                   <span>Home</span>
@@ -278,15 +278,15 @@
                       <div class="fb-post-top">
                         <div class="fb-avatar">G</div>
                         <div>
-                          <strong>Neighborhood Updates</strong>
-                          <p>Community group · 12 min</p>
+                          <strong id="facebookCreator">Neighborhood Updates</strong>
+                          <p id="facebookMeta">Community group · 12 min</p>
                         </div>
                       </div>
-                      <p class="fb-post-text">
+                      <p class="fb-post-text" id="facebookText">
                         A friend warned that this product is unsafe. Please
                         share to protect every family.
                       </p>
-                      <div class="fb-post-media">Community warning preview</div>
+                      <div class="fb-post-media" id="facebookMedia">Community warning preview</div>
                       <div class="fb-engagement">
                         <span>1.8K reactions</span>
                         <span>436 comments</span>
@@ -323,14 +323,14 @@
                     <div class="ig-post-top">
                       <div class="ig-avatar"></div>
                       <div>
-                        <strong>@visualdigest</strong>
-                        <p>Story repost · edited image</p>
+                        <strong id="instagramCreator">@visualdigest</strong>
+                        <p id="instagramMeta">Story repost · edited image</p>
                       </div>
                       <span>•••</span>
                     </div>
                     <div class="ig-media">
-                      <div class="ig-story-pill">Story preview</div>
-                      <p>This image proves what really happened. Repost if you care.</p>
+                      <div class="ig-story-pill" id="instagramMedia">Story preview</div>
+                      <p id="instagramText">This image proves what really happened. Repost if you care.</p>
                     </div>
                     <div class="ig-actions">
                       <button type="button">♡</button>
@@ -344,8 +344,8 @@
                       </button>
                     </div>
                     <div class="ig-caption">
-                      <strong>@visualdigest</strong>
-                      <span>Image context matters before resharing.</span>
+                      <strong id="instagramCaptionCreator">@visualdigest</strong>
+                      <span id="instagramCaptionText">Image context matters before resharing.</span>
                     </div>
                     <div class="ig-repost-row">
                       <button class="inline-share-trigger" type="button">
@@ -366,7 +366,7 @@
                     <button type="button" aria-label="Back">‹</button>
                     <div class="xhs-profile">
                       <span></span>
-                      <strong>AI Watch Daily</strong>
+                      <strong id="xhsCreator">AI Watch Daily</strong>
                     </div>
                     <button class="xhs-follow" type="button">Follow</button>
                     <button
@@ -379,10 +379,10 @@
                   </div>
                   <div class="xhs-image-area"></div>
                   <div class="xhs-content">
-                    <h3>
+                    <h3 id="xhsTitle">
                       Breaking: viral image shows smoke over downtown after sudden explosion
                     </h3>
-                    <p>
+                    <p id="xhsText">
                       Just saw this everywhere. People nearby say roads are blocked
                       and emergency teams are arriving. Share this so others know
                       what is happening before it gets removed.
@@ -421,8 +421,8 @@
                   >
                     <span class="mini-grade">C</span>
                     <span>
-                      <strong>Info-Grade C</strong>
-                      <small>No official source found</small>
+                      <strong id="popoutGradeText">Info-Grade C</strong>
+                      <small id="popoutGradeSummary">No official source found</small>
                     </span>
                     <span class="popout-arrow">›</span>
                   </button>
@@ -448,10 +448,10 @@
                         <strong>Transparency Rating</strong>
                       </div>
                       <div class="grade-scale">
-                        <span class="grade-a">A</span>
-                        <span class="grade-b">B</span>
-                        <span class="grade-c active">C</span>
-                        <span class="grade-d">D</span>
+                        <span class="grade-a" data-grade-letter="a">A</span>
+                        <span class="grade-b" data-grade-letter="b">B</span>
+                        <span class="grade-c active" data-grade-letter="c">C</span>
+                        <span class="grade-d" data-grade-letter="d">D</span>
                       </div>
                       <div class="grade-detail">
                         <div>
@@ -509,7 +509,7 @@
               <div class="creator-toolbar">
                 <div>
                   <span class="brand-mark small">P</span>
-                  <div><strong>Creator Publishing Studio</strong><small>PIGEON AI pre-publish assist active</small></div>
+                  <div><strong>Creator Publishing Studio</strong><small>PIGEON assist active</small></div>
                 </div>
                 <div class="creator-steps" aria-hidden="true">
                   <span class="active">Draft</span>
@@ -553,7 +553,7 @@
                       <strong>PIGEON creator check</strong>
                       <p>Improve credibility before publishing</p>
                     </div>
-                    <span>Pre-publish</span>
+                    <span>Active</span>
                   </div>
                   <div class="creator-score">
                     <div><span>Publishing readiness</span><strong id="creatorReadiness">Needs context</strong></div>
@@ -789,6 +789,6 @@
       <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
     </footer>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260805-random-cases"></script>
   </body>
 </html>

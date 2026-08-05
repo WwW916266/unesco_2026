@@ -1561,6 +1561,215 @@ p {
 .creator-pigeon.needs-attention { animation: creator-attention 500ms ease; }
 @keyframes creator-attention { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
 
+/* Creator Studio: host-neutral embedded tooling. */
+.creator-editor {
+  background: #f7f8f7;
+  border-color: #d8d8d4;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.creator-toolbar {
+  min-height: 68px;
+  padding: 14px 18px;
+  background: #ffffff;
+  border-bottom-color: #d8d8d4;
+  backdrop-filter: none;
+}
+
+.creator-toolbar > div:first-child strong {
+  color: #1f2933;
+  font-size: 0.84rem;
+}
+
+.creator-toolbar > div:first-child small {
+  color: #6f7377;
+  font-weight: 600;
+}
+
+.creator-steps {
+  gap: 0;
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #d8d8d4;
+  border-radius: 0;
+}
+
+.creator-steps span {
+  min-height: 36px;
+  padding: 0 13px;
+  display: inline-flex;
+  align-items: center;
+  color: #777b80;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border-right: 1px solid #d8d8d4;
+  border-radius: 0;
+}
+
+.creator-steps span:last-child {
+  border-right: 0;
+}
+
+.creator-steps .active {
+  color: #111827;
+  background: transparent;
+  border-bottom: 2px solid #111827;
+  margin-bottom: -1px;
+}
+
+.publish-trigger {
+  min-height: 38px;
+  padding: 0 14px;
+  color: #f9fafb;
+  background: #242424;
+  border: 1px solid #242424;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.publish-trigger:hover {
+  background: #111111;
+}
+
+.draft-card,
+.creator-pigeon {
+  border-color: #d8d8d4;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.draft-card-top span,
+.draft-tools span,
+.ai-media-mark {
+  color: #4b5563;
+  background: #f3f4f6;
+  border: 1px solid #d8d8d4;
+  border-radius: 4px;
+}
+
+.draft-tools span {
+  padding: 7px 9px;
+}
+
+.draft-tools .issue-ai,
+.draft-tools .issue-urgency {
+  color: #4b5563;
+  background: #f3f4f6;
+  border-color: #d8d8d4;
+}
+
+.draft-tools span::before {
+  color: #6b7280;
+  content: "!";
+  margin-right: 6px;
+  font-weight: 900;
+}
+
+.draft-tools span.resolved,
+.draft-tools .issue-ai.resolved,
+.draft-tools .issue-urgency.resolved {
+  color: #1f2937;
+  background: #ffffff;
+  border-color: #b7bbb8;
+}
+
+.draft-tools span.resolved::before {
+  content: "✓";
+}
+
+.creator-assist-top {
+  border-bottom-color: #e1e3e1;
+}
+
+.creator-assist-top div strong {
+  color: #1f2933;
+}
+
+.creator-assist-top div p,
+.creator-score span,
+.creator-suggestion-label,
+.creator-tier-line {
+  color: #6f7377;
+}
+
+.creator-assist-top > span:last-child {
+  color: #4b5563;
+  background: #f3f4f6;
+  border-color: #d8d8d4;
+  border-radius: 4px;
+}
+
+.creator-score strong {
+  color: #92400e;
+}
+
+.creator-score b {
+  color: #1f2937;
+}
+
+.creator-meter {
+  height: 7px;
+  background: #e5e7eb;
+  border-radius: 2px;
+}
+
+.creator-meter i {
+  background: #242424;
+  border-radius: inherit;
+}
+
+.creator-check-grid button {
+  grid-template-columns: 18px 1fr auto;
+  min-height: 48px;
+  color: #374151;
+  background: #ffffff;
+  border-color: #e1e3e1;
+  border-radius: 4px;
+}
+
+.creator-check-grid button:hover {
+  color: #111827;
+  background: #f6f6f5;
+  border-color: #cfd2cf;
+}
+
+.creator-action-icon,
+.creator-check-grid button:nth-child(2) .creator-action-icon,
+.creator-check-grid button:nth-child(3) .creator-action-icon {
+  width: 18px;
+  height: 18px;
+  color: #4b5563;
+  background: transparent;
+  border-radius: 0;
+}
+
+.creator-check-grid button em {
+  color: #6b7280;
+  background: transparent;
+  border-color: #d8d8d4;
+  border-radius: 3px;
+}
+
+.creator-check-grid button.resolved {
+  color: #1f2937;
+  background: #ffffff;
+  border-color: #b7bbb8;
+}
+
+.creator-check-grid button.resolved .creator-action-icon {
+  color: #1f2937;
+  background: transparent;
+}
+
+.creator-check-grid button.resolved em {
+  color: #1f2937;
+  border-color: #b7bbb8;
+}
+
 .platform-dot {
   width: 12px;
   height: 12px;

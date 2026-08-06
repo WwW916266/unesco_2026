@@ -42,7 +42,7 @@
     <main id="top">
       <section id="simulation" class="section simulation-section" data-perspective="viewer">
         <div class="section-heading">
-          <p class="eyebrow">Product simulation</p>
+          <p class="eyebrow"><span class="tag">Product simulation</span></p>
           <h2>Experience PIGEON inside familiar social moments.</h2>
           <p>
             This is not a real browser plugin. It is a guided prototype that
@@ -104,7 +104,7 @@
                     <small>1,204</small>
                   </button>
                   <button
-                    class="inline-share-trigger"
+                    class="inline-share-trigger share-pulse"
                     type="button"
                     aria-label="Share this video"
                   >
@@ -160,7 +160,7 @@
                         <button type="button">Like</button>
                         <button type="button">Comment</button>
                         <button
-                          class="inline-share-trigger"
+                          class="inline-share-trigger share-pulse"
                           type="button"
                           aria-label="Share this Facebook post"
                         >
@@ -201,7 +201,7 @@
                       <button type="button">♡</button>
                       <button type="button">◌</button>
                       <button
-                        class="inline-share-trigger"
+                        class="inline-share-trigger share-pulse"
                         type="button"
                         aria-label="Repost this Instagram story"
                       >
@@ -213,7 +213,7 @@
                       <span id="instagramCaptionText">Image context matters before resharing.</span>
                     </div>
                     <div class="ig-repost-row">
-                      <button class="inline-share-trigger" type="button">
+                      <button class="inline-share-trigger share-pulse" type="button">
                         Repost story
                       </button>
                     </div>
@@ -235,7 +235,7 @@
                     </div>
                     <button class="xhs-follow" type="button">Follow</button>
                     <button
-                      class="xhs-share inline-share-trigger"
+                      class="xhs-share inline-share-trigger share-pulse"
                       type="button"
                       aria-label="Share this Xiaohongshu post"
                     >
@@ -262,7 +262,7 @@
                       ◌
                     </button>
                     <button
-                      class="xhs-share-action inline-share-trigger"
+                      class="xhs-share-action inline-share-trigger share-pulse"
                       type="button"
                       aria-label="Share this Xiaohongshu note"
                     >
@@ -289,7 +289,13 @@
                       <strong id="popoutGradeText">Info-Grade C</strong>
                       <small id="popoutGradeSummary">No official source found</small>
                     </span>
-                    <span class="popout-arrow">›</span>
+                    <span class="popout-arrow" aria-hidden="true">
+                      <svg class="popout-timer" viewBox="0 0 32 32">
+                        <circle class="popout-timer-track" cx="16" cy="16" r="12"></circle>
+                        <circle class="popout-timer-progress" cx="16" cy="16" r="12"></circle>
+                      </svg>
+                      <span>›</span>
+                    </span>
                   </button>
                   <div class="pigeon-modal">
                     <div class="overlay-top">
@@ -386,22 +392,64 @@
                 </button>
               </div>
 
-              <div class="creator-workspace">
+              <div class="creator-workspace" id="creatorWorkspace">
                 <div class="draft-card">
-                  <div class="draft-card-top">
-                    <label for="creatorDraft">Post caption</label>
-                    <span>Auto-saved just now</span>
+                  <div class="creator-flow-header">
+                    <div>
+                      <span>Creator journey</span>
+                      <strong>Pick a case, watch it type, then review the signals.</strong>
+                    </div>
+                    <div class="creator-flow-steps" aria-hidden="true">
+                      <span class="active" data-flow-step="case">Case</span>
+                      <span data-flow-step="type">Type</span>
+                      <span data-flow-step="analyze">Analyze</span>
+                      <span data-flow-step="upload">Photo</span>
+                    </div>
                   </div>
-                  <div class="creator-copy" id="creatorCopy">
-                    <span class="urgency-flag">Huge update:</span> this AI image proves the downtown explosion happened today. <span class="share-flag">Everyone should share it before it disappears.</span>
+                  <div class="creator-case-panel" aria-label="Choose a creator draft case">
+                    <div class="creator-case-grid" id="creatorCaseGrid">
+                      <button type="button" data-creator-case="0">Breaking image</button>
+                      <button type="button" data-creator-case="1">Health claim</button>
+                      <button type="button" data-creator-case="2">School alert</button>
+                      <button type="button" data-creator-case="3">Edited clip</button>
+                      <button type="button" data-creator-case="4">Product warning</button>
+                    </div>
+                  </div>
+                  <div class="creator-draft-stage">
+                    <div class="draft-card-top">
+                      <label for="creatorDraft">Post caption</label>
+                      <span id="typingStatus">Choose a case to begin</span>
+                    </div>
+                    <div class="creator-copy" id="creatorCopy">
+                      Select a creator case above to watch PIGEON review the draft before publishing.
+                    </div>
                   </div>
                   <div class="creator-preview">
-                    <div class="preview-media">
-                      <span>AI image preview</span>
+                    <div class="preview-media" id="previewMedia">
+                      <span id="previewMediaLabel">Media preview</span>
                     </div>
                     <div>
-                      <strong>@citysignal <em class="ai-media-mark hidden" id="aiMediaMark">AI generated</em></strong>
-                      <p>Breaking visual update · public post</p>
+                      <strong id="creatorHandle"><span id="creatorHandleText">@creatorlab</span> <em class="ai-media-mark hidden" id="aiMediaMark">AI generated</em></strong>
+                      <p id="creatorMeta">Draft analysis will appear after typing</p>
+                    </div>
+                  </div>
+                  <div class="creator-upload-panel" aria-label="Simulated image upload analysis">
+                    <div class="upload-panel-top">
+                      <div>
+                        <span>Image upload</span>
+                        <strong>Try a preset photo check</strong>
+                      </div>
+                      <small>Simulated</small>
+                    </div>
+                    <div class="upload-case-grid" id="uploadCaseGrid">
+                      <button type="button" data-image-case="0">AI news photo</button>
+                      <button type="button" data-image-case="1">Edited screenshot</button>
+                      <button type="button" data-image-case="2">Product image</button>
+                    </div>
+                    <div class="image-analysis hidden" id="imageAnalysis">
+                      <span id="imageAnalysisGrade">Image Grade C</span>
+                      <strong id="imageAnalysisTitle">Source and AI disclosure needed</strong>
+                      <p id="imageAnalysisText">PIGEON checks origin, edit history, and whether synthetic media is disclosed.</p>
                     </div>
                   </div>
                   <div class="draft-tools">

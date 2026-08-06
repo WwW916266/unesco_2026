@@ -252,6 +252,19 @@ const actionStatus = document.querySelector("#actionStatus");
 const resolutionButtons = document.querySelectorAll(".resolution-button");
 const publishTrigger = document.querySelector("#publishTrigger");
 const creatorPigeon = document.querySelector("#creatorPigeon");
+const creatorWorkspace = document.querySelector("#creatorWorkspace");
+const creatorCaseGrid = document.querySelector("#creatorCaseGrid");
+const typingStatus = document.querySelector("#typingStatus");
+const previewMediaLabel = document.querySelector("#previewMediaLabel");
+const creatorHandle = document.querySelector("#creatorHandle");
+const creatorHandleText = document.querySelector("#creatorHandleText");
+const creatorMeta = document.querySelector("#creatorMeta");
+const uploadCaseGrid = document.querySelector("#uploadCaseGrid");
+const creatorUploadPanel = document.querySelector(".creator-upload-panel");
+const imageAnalysis = document.querySelector("#imageAnalysis");
+const imageAnalysisGrade = document.querySelector("#imageAnalysisGrade");
+const imageAnalysisTitle = document.querySelector("#imageAnalysisTitle");
+const imageAnalysisText = document.querySelector("#imageAnalysisText");
 const creatorSourceAction = document.querySelector("#creatorSourceAction");
 const creatorAiAction = document.querySelector("#creatorAiAction");
 const creatorToneAction = document.querySelector("#creatorToneAction");
@@ -266,9 +279,310 @@ const creatorCopy = document.querySelector("#creatorCopy");
 const creatorTierStatus = document.querySelector("#creatorTierStatus");
 const creatorTierStages = document.querySelectorAll(".creator-tier-stage");
 
+const creatorDraftCases = [
+  {
+    title: "Breaking image",
+    handle: "@citysignal",
+    meta: "Breaking visual update · public post",
+    media: "AI image preview",
+    draft: "Huge update: this AI image proves the downtown explosion happened today. Everyone should share it before it disappears.",
+    segments: [
+      { text: "Huge update:", className: "urgency-flag" },
+      { text: "this AI image proves", className: "share-flag" },
+      { text: "the downtown explosion happened today. Everyone should share it before it disappears.", className: "" },
+    ],
+    fixes: { source: false, ai: false, tone: false },
+    progressLabel: "Needs context",
+    tierIndex: 0,
+    imageCaseIndex: 0,
+    analysisTitle: "Source, tone, and AI disclosure all need work",
+    analysisBody: "PIGEON flags this as a high-pressure claim with no source attached and synthetic media risk.",
+    uploadPrompt: "Try a preset photo check after the draft is analyzed.",
+  },
+  {
+    title: "Health claim",
+    handle: "@healthwatch",
+    meta: "Wellness post · social share",
+    media: "Static image preview",
+    draft: "This daily supplement reverses fatigue in one week. My friend fixed everything after one post.",
+    segments: [
+      { text: "This daily supplement", className: "urgency-flag" },
+      { text: "reverses fatigue in one week.", className: "share-flag" },
+      { text: "My friend fixed everything after one post.", className: "" },
+    ],
+    fixes: { source: false, ai: true, tone: false },
+    progressLabel: "Partly disclosed",
+    tierIndex: 1,
+    imageCaseIndex: 2,
+    analysisTitle: "Health claim needs a source and calmer language",
+    analysisBody: "The post sounds confident but does not show a source or evidence for the claim.",
+    uploadPrompt: "Upload a preset image next to see how PIGEON handles visual context.",
+  },
+  {
+    title: "School alert",
+    handle: "@parentcircle",
+    meta: "Community warning · forward",
+    media: "Forwarded screenshot",
+    draft: "Schools are closing tomorrow morning. Forward this to every parent before the notice disappears.",
+    segments: [
+      { text: "Schools are closing tomorrow morning.", className: "urgency-flag" },
+      { text: "Forward this to every parent", className: "share-flag" },
+      { text: "before the notice disappears.", className: "" },
+    ],
+    fixes: { source: false, ai: false, tone: true },
+    progressLabel: "Urgent claim",
+    tierIndex: 1,
+    imageCaseIndex: 1,
+    analysisTitle: "Urgency is high and the source is missing",
+    analysisBody: "PIGEON asks for the official notice first, then suggests reducing the pressure to forward it immediately.",
+    uploadPrompt: "Then try a photo case to see a second type of check.",
+  },
+  {
+    title: "Edited clip",
+    handle: "@visualdesk",
+    meta: "Short clip · edited media",
+    media: "Video preview",
+    draft: "This clip proves the event was staged. Look closely at the cut - that is all the proof you need.",
+    segments: [
+      { text: "This clip proves", className: "urgency-flag" },
+      { text: "the event was staged.", className: "share-flag" },
+      { text: "Look closely at the cut - that is all the proof you need.", className: "" },
+    ],
+    fixes: { source: true, ai: false, tone: false },
+    progressLabel: "Source mentioned",
+    tierIndex: 2,
+    imageCaseIndex: 1,
+    analysisTitle: "Edit history and AI disclosure still need attention",
+    analysisBody: "A source is named, but the edit trail and synthetic media context are still incomplete.",
+    uploadPrompt: "You can also simulate a photo upload once the text review is done.",
+  },
+  {
+    title: "Product warning",
+    handle: "@shopwatch",
+    meta: "Consumer post · public group",
+    media: "Post preview",
+    draft: "Do not buy this bottle. The brand is hiding a recall and everyone should warn their friends now.",
+    segments: [
+      { text: "Do not buy this bottle.", className: "urgency-flag" },
+      { text: "The brand is hiding a recall", className: "share-flag" },
+      { text: "and everyone should warn their friends now.", className: "" },
+    ],
+    fixes: { source: false, ai: true, tone: false },
+    progressLabel: "Warning mode",
+    tierIndex: 2,
+    imageCaseIndex: 0,
+    analysisTitle: "Consumer warning needs a named recall source",
+    analysisBody: "PIGEON sees a strong warning without a clear citation, so it stays in check mode until the source is added.",
+    uploadPrompt: "Move on to a photo preset to finish the full flow.",
+  },
+];
+
+const creatorImageCases = [
+  {
+    label: "AI news photo",
+    grade: "c",
+    title: "Source and AI disclosure needed",
+    text: "The photo looks news-like, but origin, edit history, and AI disclosure are missing.",
+  },
+  {
+    label: "Edited screenshot",
+    grade: "d",
+    title: "Screenshot needs a traceable origin",
+    text: "This screenshot is being shared as proof, but no original post, date, or source is visible.",
+  },
+  {
+    label: "Product image",
+    grade: "b",
+    title: "Product photo is mostly traceable",
+    text: "The image includes a named seller and a visible product page, so PIGEON keeps the warning light.",
+  },
+];
+
 let activePlatform = "tiktok";
 let activeScenario = platformScenarios.tiktok.examples[1];
 let pigeonPopoutTimer;
+let creatorTypingTimer;
+let creatorTypingPhaseTimer;
+let creatorUploadReadyTimer;
+let activeCreatorCaseIndex = 0;
+let activeImageCaseIndex = 0;
+let creatorFlowLocked = true;
+let creatorCurrentDraft = creatorDraftCases[0];
+let creatorPhase = "case";
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll("\"", "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function renderSegmentedDraft(caseData) {
+  return caseData.segments
+    .map((segment) => {
+      const text = escapeHtml(segment.text);
+      return segment.className ? `<span class="${segment.className}">${text}</span>` : text;
+    })
+    .join(" ");
+}
+
+function setCreatorActionsDisabled(disabled) {
+  [creatorSourceAction, creatorAiAction, creatorToneAction, publishTrigger].forEach((button) => {
+    if (button) button.disabled = disabled;
+  });
+}
+
+function setCreatorPhase(phase) {
+  creatorPhase = phase;
+  if (creatorWorkspace) creatorWorkspace.dataset.phase = phase;
+  document.querySelectorAll(".creator-flow-steps span").forEach((step) => {
+    const stepName = step.dataset.flowStep;
+    step.classList.toggle("active", stepName === phase);
+    step.classList.toggle("done", ["type", "analyze", "upload"].includes(stepName) && ["analyze", "upload"].includes(phase) && stepName !== phase);
+  });
+}
+
+function setCreatorUploadReady(ready) {
+  creatorFlowLocked = !ready;
+  creatorPigeon.classList.toggle("creator-ready", ready);
+  creatorUploadPanel?.classList.toggle("active", ready);
+  setCreatorActionsDisabled(!ready);
+  if (ready && creatorPhase === "analyze") setCreatorPhase("upload");
+}
+
+function clearCreatorTimers() {
+  clearTimeout(creatorTypingTimer);
+  clearTimeout(creatorTypingPhaseTimer);
+  clearTimeout(creatorUploadReadyTimer);
+}
+
+function updateCreatorCaseButtons(index) {
+  creatorCaseGrid?.querySelectorAll("button").forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.creatorCase) === index);
+  });
+}
+
+function updateImageCaseButtons(index) {
+  uploadCaseGrid?.querySelectorAll("button").forEach((button) => {
+    button.classList.toggle("active", Number(button.dataset.imageCase) === index);
+  });
+}
+
+function updateCreatorAnalysis(caseData) {
+  const { fixes } = caseData;
+  const count = Object.values(fixes).filter(Boolean).length;
+  const readiness = [10, 43, 72, 100][count];
+  creatorProgress.textContent = `${readiness}%`;
+  creatorMeter.style.width = `${readiness}%`;
+  creatorReadiness.textContent = count === 3 ? "Ready to publish" : count === 2 ? "Almost ready" : caseData.progressLabel;
+  creatorPigeon.classList.toggle("ready", count === 3);
+  creatorTierStatus.textContent = ["Level 1: Nest", "Level 2: Nest + Egg", "Level 3: Young Bird", "Level 4: Full Bird"][caseData.tierIndex];
+  creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === caseData.tierIndex));
+  sourceIssue.textContent = fixes.source ? "Source linked" : "No source cited";
+  sourceIssue.classList.toggle("resolved", fixes.source);
+  aiIssue.textContent = fixes.ai ? "AI media disclosed" : "AI disclosure missing";
+  aiIssue.classList.toggle("resolved", fixes.ai);
+  urgencyIssue.textContent = fixes.tone ? "Tone balanced" : "High urgency language";
+  urgencyIssue.classList.toggle("resolved", fixes.tone);
+  aiMediaMark.classList.toggle("hidden", !fixes.ai);
+  creatorCopy.classList.toggle("tone-balanced", fixes.tone);
+  creatorCopy.classList.add("is-highlighted");
+  setCreatorPhase("analyze");
+
+  [
+    [creatorSourceAction, fixes.source, "Source citation attached", "Add primary source link", "Done", "+ Source"],
+    [creatorAiAction, fixes.ai, "AI media disclosed", "Mark AI media usage", "Done", "+ Tag"],
+    [creatorToneAction, fixes.tone, "Tone balanced", "Soften emotional urgency", "Done", "Auto-fix"],
+  ].forEach(([button, isDone, doneText, idleText, doneTag, idleTag]) => {
+    button.classList.toggle("resolved", isDone);
+    button.querySelector("span:nth-child(2)").textContent = isDone ? doneText : idleText;
+    button.querySelector("em").textContent = isDone ? doneTag : idleTag;
+  });
+}
+
+function renderTypedDraft(caseData) {
+  creatorCopy.innerHTML = renderSegmentedDraft(caseData);
+}
+
+function typeCreatorDraft(caseData) {
+  clearCreatorTimers();
+  creatorCurrentDraft = caseData;
+  setCreatorPhase("type");
+  typingStatus.textContent = "Typing draft...";
+  creatorCopy.classList.remove("tone-balanced");
+  creatorCopy.classList.remove("is-highlighted");
+  creatorCopy.classList.add("is-typing");
+  creatorCopy.textContent = "";
+  previewMediaLabel.textContent = caseData.media;
+  creatorHandleText.textContent = caseData.handle;
+  creatorMeta.textContent = caseData.meta;
+  imageAnalysis.classList.add("hidden");
+  imageAnalysis.classList.remove("active");
+  imageAnalysisGrade.textContent = "Image Grade C";
+  imageAnalysisTitle.textContent = "Source and AI disclosure needed";
+  imageAnalysisText.textContent = "PIGEON checks origin, edit history, and whether synthetic media is disclosed.";
+  setCreatorUploadReady(false);
+
+  const draft = caseData.draft;
+  let index = 0;
+  const step = () => {
+    creatorCopy.textContent = draft.slice(0, index);
+    index += 2;
+    if (index <= draft.length) {
+      creatorTypingTimer = setTimeout(step, 18);
+    } else {
+      creatorCopy.classList.remove("is-typing");
+      renderTypedDraft(caseData);
+      typingStatus.textContent = "Draft analyzed";
+      creatorCopy.classList.add("is-highlighted");
+      updateCreatorAnalysis(caseData);
+      setCreatorUploadReady(true);
+      creatorUploadReadyTimer = setTimeout(() => {
+        typingStatus.textContent = caseData.uploadPrompt;
+      }, 360);
+      creatorTypingPhaseTimer = setTimeout(() => {
+        setImageCase(caseData.imageCaseIndex);
+      }, 620);
+    }
+  };
+  step();
+}
+
+function setCreatorCase(index) {
+  const caseData = creatorDraftCases[index];
+  if (!caseData) return;
+  activeCreatorCaseIndex = index;
+  updateCreatorCaseButtons(index);
+  creatorPigeon.classList.remove("needs-attention");
+  setCreatorActionsDisabled(true);
+  setCreatorPhase("case");
+  creatorReadiness.textContent = "Typing...";
+  creatorProgress.textContent = "0%";
+  creatorMeter.style.width = "0%";
+  creatorTierStatus.textContent = "Level 1: Nest";
+  creatorTierStages.forEach((stage, stageIndex) => stage.classList.toggle("active", stageIndex === 0));
+  sourceIssue.textContent = "Loading...";
+  aiIssue.textContent = "Loading...";
+  urgencyIssue.textContent = "Loading...";
+  typingStatus.textContent = "Typing draft...";
+  typeCreatorDraft(caseData);
+}
+
+function setImageCase(index) {
+  const imageCase = creatorImageCases[index];
+  if (!imageCase) return;
+  activeImageCaseIndex = index;
+  updateImageCaseButtons(index);
+  setCreatorPhase("upload");
+  imageAnalysis.classList.remove("hidden");
+  imageAnalysis.classList.add("active");
+  imageAnalysisGrade.textContent = `Image Grade ${imageCase.grade.toUpperCase()}`;
+  imageAnalysisTitle.textContent = imageCase.title;
+  imageAnalysisText.textContent = imageCase.text;
+  previewMediaLabel.textContent = imageCase.label;
+}
 
 function pickScenario(platformKey) {
   const examples = platformScenarios[platformKey]?.examples || [];
@@ -317,6 +631,8 @@ function updatePlatformContent(platformKey, scenario) {
 
 function hidePigeonPopout() {
   clearTimeout(pigeonPopoutTimer);
+  pigeonOverlay.classList.remove("is-timing");
+  pigeonOverlay.classList.remove("just-opened");
   pigeonOverlay.classList.add("hidden");
   pigeonOverlay.classList.add("compact");
   pigeonOverlay.classList.remove("expanded");
@@ -325,10 +641,15 @@ function hidePigeonPopout() {
 
 function showPigeonPopout() {
   clearTimeout(pigeonPopoutTimer);
+  pigeonOverlay.classList.remove("is-timing");
   pigeonOverlay.classList.remove("hidden");
   pigeonOverlay.classList.add("compact");
   pigeonOverlay.classList.remove("expanded");
+  pigeonOverlay.classList.add("just-opened");
   pigeonGradePopout.setAttribute("aria-expanded", "false");
+  void pigeonOverlay.offsetWidth;
+  pigeonOverlay.classList.add("is-timing");
+  setTimeout(() => pigeonOverlay.classList.remove("just-opened"), 250);
   pigeonPopoutTimer = setTimeout(hidePigeonPopout, 15000);
 }
 
@@ -387,7 +708,9 @@ triggerPigeon.addEventListener("click", () => {
 });
 
 pigeonGradePopout.addEventListener("click", () => {
+  if (pigeonOverlay.classList.contains("just-opened")) return;
   clearTimeout(pigeonPopoutTimer);
+  pigeonOverlay.classList.remove("is-timing");
   pigeonOverlay.classList.remove("compact");
   pigeonOverlay.classList.add("expanded");
   pigeonGradePopout.setAttribute("aria-expanded", "true");
@@ -411,41 +734,63 @@ resolutionButtons.forEach((button) => {
   });
 });
 
-let creatorFixes = { source: false, ai: false, tone: false };
-
 function updateCreatorStudio() {
-  const count = Object.values(creatorFixes).filter(Boolean).length;
-  const readiness = [10, 43, 72, 100][count];
-  creatorProgress.textContent = `${readiness}%`;
-  creatorMeter.style.width = `${readiness}%`;
-  creatorReadiness.textContent = count === 3 ? "Ready to publish" : count === 2 ? "Almost ready" : "Needs context";
-  creatorPigeon.classList.toggle("ready", count === 3);
-  const tierNames = ["Level 1: Nest", "Level 2: Nest + Egg", "Level 3: Young Bird", "Level 4: Full Bird"];
-  creatorTierStatus.textContent = tierNames[count];
-  creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === count));
+  if (creatorFlowLocked) {
+    setCreatorPhase("case");
+    creatorReadiness.textContent = "Choose a case";
+    creatorProgress.textContent = "0%";
+    creatorMeter.style.width = "0%";
+    creatorPigeon.classList.remove("ready");
+    creatorTierStatus.textContent = "Level 1: Nest";
+    creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === 0));
+    sourceIssue.textContent = "No case selected";
+    aiIssue.textContent = "No case selected";
+    urgencyIssue.textContent = "No case selected";
+    creatorCopy.classList.remove("tone-balanced", "is-highlighted");
+    creatorUploadPanel?.classList.remove("active");
+    setCreatorActionsDisabled(true);
+    return;
+  }
 
-  sourceIssue.textContent = creatorFixes.source ? "Source linked" : "No source cited";
-  sourceIssue.classList.toggle("resolved", creatorFixes.source);
-  aiIssue.textContent = creatorFixes.ai ? "AI media disclosed" : "AI disclosure missing";
-  aiIssue.classList.toggle("resolved", creatorFixes.ai);
-  urgencyIssue.textContent = creatorFixes.tone ? "Tone balanced" : "High urgency language";
-  urgencyIssue.classList.toggle("resolved", creatorFixes.tone);
-  aiMediaMark.classList.toggle("hidden", !creatorFixes.ai);
-  creatorCopy.classList.toggle("tone-balanced", creatorFixes.tone);
-
-  [[creatorSourceAction, creatorFixes.source, "Source citation attached", "Add primary source link", "Done", "+ Source"], [creatorAiAction, creatorFixes.ai, "AI media disclosed", "Mark AI media usage", "Done", "+ Tag"], [creatorToneAction, creatorFixes.tone, "Tone balanced", "Soften emotional urgency", "Done", "Auto-fix"]].forEach(([button, isDone, doneText, idleText, doneTag, idleTag]) => {
-    button.classList.toggle("resolved", isDone);
-    button.querySelector("span:nth-child(2)").textContent = isDone ? doneText : idleText;
-    button.querySelector("em").textContent = isDone ? doneTag : idleTag;
-  });
+  updateCreatorAnalysis(creatorCurrentDraft);
 }
 
-creatorSourceAction.addEventListener("click", () => { creatorFixes.source = !creatorFixes.source; updateCreatorStudio(); });
-creatorAiAction.addEventListener("click", () => { creatorFixes.ai = !creatorFixes.ai; updateCreatorStudio(); });
-creatorToneAction.addEventListener("click", () => { creatorFixes.tone = !creatorFixes.tone; updateCreatorStudio(); });
+creatorCaseGrid?.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-creator-case]");
+  if (!button) return;
+  setCreatorCase(Number(button.dataset.creatorCase));
+});
+
+uploadCaseGrid?.addEventListener("click", (event) => {
+  const button = event.target.closest("button[data-image-case]");
+  if (!button || creatorFlowLocked) return;
+  setImageCase(Number(button.dataset.imageCase));
+});
+
+creatorSourceAction.addEventListener("click", () => {
+  creatorCurrentDraft = {
+    ...creatorCurrentDraft,
+    fixes: { ...creatorCurrentDraft.fixes, source: !creatorCurrentDraft.fixes.source },
+  };
+  updateCreatorStudio();
+});
+creatorAiAction.addEventListener("click", () => {
+  creatorCurrentDraft = {
+    ...creatorCurrentDraft,
+    fixes: { ...creatorCurrentDraft.fixes, ai: !creatorCurrentDraft.fixes.ai },
+  };
+  updateCreatorStudio();
+});
+creatorToneAction.addEventListener("click", () => {
+  creatorCurrentDraft = {
+    ...creatorCurrentDraft,
+    fixes: { ...creatorCurrentDraft.fixes, tone: !creatorCurrentDraft.fixes.tone },
+  };
+  updateCreatorStudio();
+});
 
 publishTrigger.addEventListener("click", () => {
-  if (Object.values(creatorFixes).every(Boolean)) {
+  if (Object.values(creatorCurrentDraft.fixes).every(Boolean)) {
     creatorReadiness.textContent = "Published with context";
   } else {
     creatorPigeon.classList.add("needs-attention");
@@ -454,6 +799,7 @@ publishTrigger.addEventListener("click", () => {
 });
 
 updateCreatorStudio();
+setCreatorPhase("case");
 
 setPlatform("tiktok");
 setPerspective("viewer");

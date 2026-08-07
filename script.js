@@ -252,6 +252,7 @@ const actionStatus = document.querySelector("#actionStatus");
 const resolutionButtons = document.querySelectorAll(".resolution-button");
 const publishTrigger = document.querySelector("#publishTrigger");
 const creatorPigeon = document.querySelector("#creatorPigeon");
+const creatorEditor = document.querySelector(".creator-editor");
 const creatorWorkspace = document.querySelector("#creatorWorkspace");
 const creatorCaseGrid = document.querySelector("#creatorCaseGrid");
 const typingStatus = document.querySelector("#typingStatus");
@@ -409,6 +410,7 @@ let activeImageCaseIndex = 0;
 let creatorFlowLocked = true;
 let creatorCurrentDraft = creatorDraftCases[0];
 let creatorPhase = "case";
+let creatorTutorialDismissed = false;
 
 function escapeHtml(value) {
   return String(value)
@@ -468,6 +470,18 @@ function updateImageCaseButtons(index) {
   uploadCaseGrid?.querySelectorAll("button").forEach((button) => {
     button.classList.toggle("active", Number(button.dataset.imageCase) === index);
   });
+}
+
+function setCreatorTutorialVisible(isVisible) {
+  const firstCaseButton = creatorCaseGrid?.querySelector("button[data-creator-case='0']");
+  const shouldShow = Boolean(isVisible && !creatorTutorialDismissed && creatorFlowLocked);
+  creatorEditor?.classList.toggle("tutorial-active", shouldShow);
+  firstCaseButton?.classList.toggle("tutorial-target", shouldShow);
+}
+
+function dismissCreatorTutorial() {
+  creatorTutorialDismissed = true;
+  setCreatorTutorialVisible(false);
 }
 
 function updateCreatorAnalysis(caseData) {
@@ -661,6 +675,7 @@ function setPerspective(perspective) {
   });
   hidePigeonPopout();
   creatorPigeon.classList.toggle("hidden", perspective !== "creator");
+  setCreatorTutorialVisible(perspective === "creator");
 }
 
 function setPlatform(platformKey) {
@@ -758,6 +773,7 @@ function updateCreatorStudio() {
 creatorCaseGrid?.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-creator-case]");
   if (!button) return;
+  dismissCreatorTutorial();
   setCreatorCase(Number(button.dataset.creatorCase));
 });
 

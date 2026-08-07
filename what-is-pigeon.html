@@ -15,19 +15,20 @@
   <body>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="PIGEON home">
+        <img class="brand-logo" src="Picture/logo/main.png" alt="" aria-hidden="true" />
         <span class="brand-title">PIGEON</span>
         <span class="brand-pill">Protocol</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <div class="nav-group">
-          <a href="what-is-pigeon.html" aria-current="page">What Is PIGEON</a>
-          <div class="nav-dropdown" aria-label="What Is PIGEON sections">
+          <a href="what-is-pigeon.html" aria-current="page">About Pigeon</a>
+          <div class="nav-dropdown" aria-label="About Pigeon sections">
             <a href="what-is-pigeon.html#problem">Problem</a>
             <a href="what-is-pigeon.html#solution">Solution</a>
           </div>
         </div>
-        <a href="how-pigeon-works.html">How PIGEON Works</a>
+        <a href="how-pigeon-works.html">Start your Journey</a>
         <div class="nav-group">
           <a href="highlight.html">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
@@ -40,9 +41,71 @@
     </header>
 
     <main id="top">
+      <section class="section about-evidence-section" aria-labelledby="about-evidence-title">
+        <p class="about-section-kicker">A Small Bird with a Big Mission</p>
+        <div class="about-evidence-layout">
+          <div class="poster-carousel" data-poster-carousel aria-label="Digital attention and misinformation context">
+            <div class="poster-viewport">
+              <article class="poster-slide poster-slide--figure is-active" data-poster-slide>
+                <span class="poster-no">No. 01</span>
+                <strong class="poster-figure-value">2,600</strong>
+                <p class="poster-figure-label">TIMES A DAY THE AVERAGE USER TOUCHES THEIR PHONE</p>
+                <p class="poster-figure-note">Everyday attention is already fragmented before a post appears.</p>
+              </article>
+              <article class="poster-slide poster-slide--figure" data-poster-slide>
+                <span class="poster-no">No. 02</span>
+                <strong class="poster-figure-value">300 ft</strong>
+                <p class="poster-figure-label">OF CONTENT IS SCROLLED THROUGH IN THAT SAME TIME</p>
+                <p class="poster-figure-note">Feeds move faster than context can naturally travel.</p>
+              </article>
+              <article class="poster-slide poster-slide--figure" data-poster-slide>
+                <span class="poster-no">No. 03</span>
+                <strong class="poster-figure-value">50M</strong>
+                <p class="poster-figure-label">DIGITAL CREATORS ARE SHAPING WHAT PEOPLE SEE</p>
+                <p class="poster-figure-note">The creator economy continues to grow 10 to 20% every year.</p>
+              </article>
+              <article class="poster-slide poster-slide--quote" data-poster-slide>
+                <span class="poster-no">No. 04</span>
+                <p class="poster-quote">
+                  False news was <strong>70% more likely</strong> to be shared than verified stories
+                  and reached people <strong>six times faster.</strong>
+                </p>
+                <p class="poster-figure-note">Among 126,000 news stories studied, the difference in speed was dramatic.</p>
+              </article>
+              <article class="poster-slide poster-slide--quote" data-poster-slide>
+                <span class="poster-no">No. 05</span>
+                <p class="poster-quote">
+                  <strong>62%</strong> of digital content creators do not rigorously fact-check before they share.
+                </p>
+                <p class="poster-quote-secondary">
+                  <strong>58%</strong> of people worldwide worry about their ability to tell what is true online.
+                  Creators are increasingly becoming our news source instead of journalists.
+                </p>
+                <p class="poster-figure-note">The pressure to publish is now also a pressure to verify.</p>
+              </article>
+            </div>
+            <div class="poster-progress" aria-label="Poster progress">
+              <span class="poster-count" data-poster-count>01 / 05</span>
+              <div class="poster-dots" role="tablist" aria-label="Evidence slides">
+                <button type="button" class="poster-dot is-active" data-poster-dot aria-label="Slide 1"></button>
+                <button type="button" class="poster-dot" data-poster-dot aria-label="Slide 2"></button>
+                <button type="button" class="poster-dot" data-poster-dot aria-label="Slide 3"></button>
+                <button type="button" class="poster-dot" data-poster-dot aria-label="Slide 4"></button>
+                <button type="button" class="poster-dot" data-poster-dot aria-label="Slide 5"></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-evidence-copy">
+            <p class="eyebrow live-eyebrow">Digital attention</p>
+            <h1 id="about-evidence-title">The problem is not only false information. It is speed.</h1>
+          </div>
+        </div>
+      </section>
+
       <section id="problem" class="section problem-section">
         <div class="section-heading problem-heading">
-          <p class="problem-eyebrow"><span class="tag">Core problem</span></p>
+          <p class="problem-eyebrow">Core problem</p>
           <h2>Misinformation spreads in the moments before people think.</h2>
           <p>
             Current tools often react after harmful content has already moved
@@ -59,13 +122,13 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-9 12h7l-1 8 9-12h-7z"/></svg>
               </span>
             </div>
-            <span class="problem-kicker">Creator-side friction</span>
-            <h3>Creators publish under pressure</h3>
-            <p>
-              Social platforms reward speed, emotion, and engagement more
-              visibly than context, source transparency, or responsible
-              framing.
-            </p>
+            <span class="problem-kicker">The Creation Gap</span>
+            <h3>Creators Create Under Pressure</h3>
+            <ul class="problem-points">
+              <li>Algorithms reward speed and engagement, not accuracy.</li>
+              <li>Creators lack simple tools to spot misinformation risks before posting.</li>
+              <li>The system favors viral content over responsible communication.</li>
+            </ul>
             <div class="problem-card-footer"><span>Speed over accuracy</span><i aria-hidden="true"></i></div>
           </article>
           <article class="problem-card problem-card-sharing">
@@ -75,13 +138,14 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4"/><path d="m8.6 13.5 6.8 4"/></svg>
               </span>
             </div>
-            <span class="problem-kicker">Consumer-side behavior</span>
-            <h3>Users share reflexively</h3>
-            <p>
-              People often forward posts in emotional or trusted spaces before
-              checking the source, missing context, or possible harm.
-            </p>
-            <div class="problem-card-footer"><span>Reflexive sharing</span><i aria-hidden="true"></i></div>
+            <span class="problem-kicker">The Media Literacy Gap</span>
+            <h3>Consumers Engage Before They Evaluate</h3>
+            <ul class="problem-points">
+              <li>Users scroll past vast volumes of content daily, liking and sharing before critically evaluating what they see.</li>
+              <li>A single click can amplify information instantly, often outpacing fact-checking and thoughtful judgment.</li>
+              <li>The result is a persistent gap between rapid participation and the critical thinking needed to assess information responsibly.</li>
+            </ul>
+            <div class="problem-card-footer"><span>Engagement before evaluation</span><i aria-hidden="true"></i></div>
           </article>
           <article class="problem-card problem-card-signals">
             <div class="problem-card-top">
@@ -90,13 +154,30 @@
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/><path d="M3 3l18 18"/></svg>
               </span>
             </div>
-            <span class="problem-kicker">Ecosystem gap</span>
-            <h3>Trust signals are unclear</h3>
-            <p>
-              Digital content rarely shows whether claims are traceable,
-              emotionally loaded, complete, or AI-generated.
-            </p>
-            <div class="problem-card-footer"><span>Missing transparency</span><i aria-hidden="true"></i></div>
+            <span class="problem-kicker">The Trust Transparency Gap</span>
+            <h3>Digital Trust Remains Invisible</h3>
+            <ul class="problem-points">
+              <li>Most content lacks clear trust signals: sources, evidence, and AI disclosure are often invisible.</li>
+              <li>Users can’t tell what’s credible, what’s synthetic, and what’s missing context.</li>
+              <li>Without transparency, informed engagement online becomes nearly impossible.</li>
+            </ul>
+            <div class="problem-card-footer"><span>Invisible trust signals</span><i aria-hidden="true"></i></div>
+          </article>
+          <article class="problem-card problem-card-opportunity">
+            <div class="problem-card-top">
+              <span class="card-number">04</span>
+              <span class="problem-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19V5"/><path d="M4 5h11l-1 4 1 4H4"/><path d="M18 8v11"/><path d="M15 19h6"/></svg>
+              </span>
+            </div>
+            <span class="problem-kicker">The Opportunity Gap</span>
+            <h3>Current Solutions Act After Problems Appear</h3>
+            <ul class="problem-points">
+              <li>Most solutions react after harm spreads: posts are removed, facts checked, and warnings issued too late.</li>
+              <li>Damage is already done by the time platforms and fact-checkers intervene.</li>
+              <li>Real protection requires acting at the source before harmful content goes viral.</li>
+            </ul>
+            <div class="problem-card-footer"><span>Too late in the flow</span><i aria-hidden="true"></i></div>
           </article>
         </div>
       </section>
@@ -104,7 +185,7 @@
 
       <section id="solution" class="section section-band solution-section">
         <div class="section-heading narrow solution-heading">
-          <p class="solution-eyebrow"><span class="tag">Solution</span></p>
+          <p class="solution-eyebrow">Solution</p>
           <h2>A voluntary transparency layer, not a truth machine.</h2>
           <p>
             PIGEON does not block content or claim to decide absolute truth. It
@@ -165,8 +246,91 @@
     </main>
 
     <footer class="site-footer">
+      <img class="footer-logo" src="Picture/logo/3.png" alt="" aria-hidden="true" />
       <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
     </footer>
 
+    <script>
+      (() => {
+        const carousel = document.querySelector("[data-poster-carousel]");
+        if (!carousel) return;
+
+        const slides = Array.from(carousel.querySelectorAll("[data-poster-slide]"));
+        const dots = Array.from(carousel.querySelectorAll("[data-poster-dot]"));
+        const count = carousel.querySelector("[data-poster-count]");
+        if (!slides.length) return;
+
+        const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const holdMs = 4600;
+        const fadeMs = 280;
+        const gapMs = 220;
+        let activeIndex = 0;
+        let switching = false;
+        let intervalId = null;
+        let timeoutId = null;
+
+        function syncUi(index) {
+          slides.forEach((slide, slideIndex) => {
+            slide.classList.toggle("is-active", slideIndex === index);
+            slide.classList.remove("is-leaving");
+          });
+
+          dots.forEach((dot, dotIndex) => {
+            dot.classList.toggle("is-active", dotIndex === index);
+            dot.setAttribute("aria-selected", String(dotIndex === index));
+          });
+
+          if (count) {
+            count.textContent = `${String(index + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+          }
+        }
+
+        function goTo(nextIndex) {
+          if (switching || nextIndex === activeIndex) return;
+
+          switching = true;
+          const current = slides[activeIndex];
+          current.classList.add("is-leaving");
+
+          clearTimeout(timeoutId);
+          timeoutId = window.setTimeout(() => {
+            current.classList.remove("is-active", "is-leaving");
+            activeIndex = nextIndex;
+            window.setTimeout(() => {
+              syncUi(activeIndex);
+              switching = false;
+            }, gapMs);
+          }, fadeMs);
+        }
+
+        function advance() {
+          goTo((activeIndex + 1) % slides.length);
+        }
+
+        function startAuto() {
+          if (prefersReducedMotion.matches || slides.length < 2) return;
+          clearInterval(intervalId);
+          intervalId = window.setInterval(advance, holdMs);
+        }
+
+        dots.forEach((dot, index) => {
+          dot.addEventListener("click", () => {
+            clearInterval(intervalId);
+            if (index !== activeIndex) {
+              goTo(index);
+            }
+            startAuto();
+          });
+        });
+
+        carousel.addEventListener("mouseenter", () => clearInterval(intervalId));
+        carousel.addEventListener("mouseleave", startAuto);
+        carousel.addEventListener("focusin", () => clearInterval(intervalId));
+        carousel.addEventListener("focusout", startAuto);
+
+        syncUi(activeIndex);
+        startAuto();
+      })();
+    </script>
   </body>
 </html>

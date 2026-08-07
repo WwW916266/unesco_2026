@@ -15,19 +15,20 @@
   <body>
     <header class="site-header">
       <a class="brand" href="index.html" aria-label="PIGEON home">
+        <img class="brand-logo" src="Picture/logo/main.png" alt="" aria-hidden="true" />
         <span class="brand-title">PIGEON</span>
         <span class="brand-pill">Protocol</span>
       </a>
       <nav class="site-nav" aria-label="Main navigation">
         <a href="index.html">Home</a>
         <div class="nav-group">
-          <a href="what-is-pigeon.html">What Is PIGEON</a>
-          <div class="nav-dropdown" aria-label="What Is PIGEON sections">
+          <a href="what-is-pigeon.html">About Pigeon</a>
+          <div class="nav-dropdown" aria-label="About Pigeon sections">
             <a href="what-is-pigeon.html#problem">Problem</a>
             <a href="what-is-pigeon.html#solution">Solution</a>
           </div>
         </div>
-        <a href="how-pigeon-works.html">How PIGEON Works</a>
+        <a href="how-pigeon-works.html">Start your Journey</a>
         <div class="nav-group">
           <a href="highlight.html" aria-current="page">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
@@ -42,7 +43,7 @@
     <main id="top">
       <section id="tiers" class="section tier-section">
         <div class="section-heading">
-          <p class="eyebrow"><span class="tag">Trust tiers</span></p>
+          <p class="eyebrow">Trust tiers</p>
           <h2>Reward transparent behavior, not popularity.</h2>
           <p>
             PIGEON badges give creators a visible path for building credibility
@@ -73,34 +74,47 @@
               </div>
             </div>
             <div class="tier-progress">
-              <article>
+              <article data-tier="1" role="button" tabindex="0" aria-pressed="false">
                 <div class="tier-icon nest" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 1</p>
                 <strong>Nest</strong>
               </article>
-              <article>
+              <article data-tier="2" role="button" tabindex="0" aria-pressed="false">
                 <div class="tier-icon egg" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 2</p>
                 <strong>Nest + Egg</strong>
               </article>
-              <article class="active">
+              <article class="active" data-tier="3" role="button" tabindex="0" aria-pressed="true">
                 <div class="tier-icon young-bird" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 3</p>
                 <strong>Young Bird</strong>
               </article>
-              <article>
+              <article data-tier="4" role="button" tabindex="0" aria-pressed="false">
                 <div class="tier-icon full-bird" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 4</p>
                 <strong>Full Bird</strong>
               </article>
+            </div>
+            <div class="tier-journey-progress" aria-live="polite">
+              <div class="tier-progress-heading">
+                <span>Trust journey</span>
+                <strong id="tierProgressLabel">Level 3 · Young Bird</strong>
+              </div>
+              <div class="tier-progress-track" aria-hidden="true">
+                <span id="tierProgressFill"></span>
+              </div>
+              <div class="tier-progress-meta">
+                <span id="tierProgressDescription">Consistent context and disclosure are visible across your content.</span>
+                <b id="tierProgressPercent">75%</b>
+              </div>
             </div>
           </div>
 
@@ -119,7 +133,7 @@
 
       <section id="label" class="section label-section">
         <div class="section-heading label-heading">
-          <p class="label-eyebrow"><span class="tag">Transparency label</span></p>
+          <p class="label-eyebrow">Transparency label</p>
           <h2>Content gets context, not a pass/fail stamp.</h2>
           <p>
             The PIGEON label works like a nutrition label for information,
@@ -190,7 +204,7 @@
       <section class="section section-band">
         <div class="journey-grid">
           <div>
-            <p class="eyebrow"><span class="tag">User journey</span></p>
+            <p class="eyebrow">User journey</p>
             <h2>Two small pauses can change the flow of information.</h2>
           </div>
           <div class="journey-steps">
@@ -217,8 +231,88 @@
     </main>
 
     <footer class="site-footer">
+      <img class="footer-logo" src="Picture/logo/3.png" alt="" aria-hidden="true" />
       <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
     </footer>
+
+    <script>
+      (() => {
+        const cards = [...document.querySelectorAll(".tier-progress article[data-tier]")];
+        const progressFill = document.querySelector("#tierProgressFill");
+        const progressLabel = document.querySelector("#tierProgressLabel");
+        const progressDescription = document.querySelector("#tierProgressDescription");
+        const progressPercent = document.querySelector("#tierProgressPercent");
+        const tierBadge = document.querySelector(".id-badge");
+        const tierBadgeIcon = tierBadge?.querySelector(".tier-icon");
+        const tierBadgeLabel = tierBadge?.querySelector(":scope > span:last-child");
+
+        const tiers = {
+          1: {
+            label: "Level 1 · Nest",
+            badge: "Level 1",
+            icon: "nest",
+            percent: 25,
+            description: "A first pause makes room for more careful sharing.",
+          },
+          2: {
+            label: "Level 2 · Nest + Egg",
+            badge: "Level 2",
+            icon: "egg",
+            percent: 50,
+            description: "Sources and corrections begin to become part of the habit.",
+          },
+          3: {
+            label: "Level 3 · Young Bird",
+            badge: "Level 3",
+            icon: "young-bird",
+            percent: 75,
+            description: "Consistent context and disclosure are visible across your content.",
+          },
+          4: {
+            label: "Level 4 · Full Bird",
+            badge: "Level 4",
+            icon: "full-bird",
+            percent: 100,
+            description: "Transparent communication becomes a visible standard for others.",
+          },
+        };
+
+        const selectTier = (tierNumber) => {
+          const tier = tiers[tierNumber];
+          if (!tier) return;
+
+          cards.forEach((card) => {
+            const isActive = Number(card.dataset.tier) === tierNumber;
+            card.classList.toggle("active", isActive);
+            card.setAttribute("aria-pressed", String(isActive));
+          });
+
+          progressLabel.textContent = tier.label;
+          progressDescription.textContent = tier.description;
+          progressPercent.textContent = `${tier.percent}%`;
+          progressFill.style.width = `${tier.percent}%`;
+
+          if (tierBadgeLabel) tierBadgeLabel.textContent = tier.badge;
+          if (tierBadgeIcon) {
+            tierBadgeIcon.classList.remove("nest", "egg", "young-bird", "full-bird");
+            tierBadgeIcon.classList.add(tier.icon);
+          }
+        };
+
+        cards.forEach((card) => {
+          const activate = () => selectTier(Number(card.dataset.tier));
+          card.addEventListener("click", activate);
+          card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") {
+              event.preventDefault();
+              activate();
+            }
+          });
+        });
+
+        selectTier(3);
+      })();
+    </script>
 
   </body>
 </html>

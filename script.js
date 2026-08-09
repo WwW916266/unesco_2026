@@ -492,7 +492,7 @@ function updateCreatorAnalysis(caseData) {
   creatorMeter.style.width = `${readiness}%`;
   creatorReadiness.textContent = count === 3 ? "Ready to publish" : count === 2 ? "Almost ready" : caseData.progressLabel;
   creatorPigeon.classList.toggle("ready", count === 3);
-  creatorTierStatus.textContent = ["Level 1: Nest", "Level 2: Nest + Egg", "Level 3: Young Bird", "Level 4: Full Bird"][caseData.tierIndex];
+  creatorTierStatus.textContent = ["Level 1: Nesting", "Level 2: Fledging", "Level 3: Soaring", "Level 4: Pioneering"][caseData.tierIndex];
   creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === caseData.tierIndex));
   sourceIssue.textContent = fixes.source ? "Source linked" : "No source cited";
   sourceIssue.classList.toggle("resolved", fixes.source);
@@ -575,7 +575,7 @@ function setCreatorCase(index) {
   creatorReadiness.textContent = "Typing...";
   creatorProgress.textContent = "0%";
   creatorMeter.style.width = "0%";
-  creatorTierStatus.textContent = "Level 1: Nest";
+  creatorTierStatus.textContent = "Level 1: Nesting";
   creatorTierStages.forEach((stage, stageIndex) => stage.classList.toggle("active", stageIndex === 0));
   sourceIssue.textContent = "Loading...";
   aiIssue.textContent = "Loading...";
@@ -756,7 +756,7 @@ function updateCreatorStudio() {
     creatorProgress.textContent = "0%";
     creatorMeter.style.width = "0%";
     creatorPigeon.classList.remove("ready");
-    creatorTierStatus.textContent = "Level 1: Nest";
+    creatorTierStatus.textContent = "Level 1: Nesting";
     creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === 0));
     sourceIssue.textContent = "No case selected";
     aiIssue.textContent = "No case selected";

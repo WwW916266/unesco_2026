@@ -46,8 +46,10 @@
           <p class="eyebrow">Trust tiers</p>
           <h2>Reward transparent behavior, not popularity.</h2>
           <p>
-            PIGEON badges give creators a visible path for building credibility
-            through sourcing, AI disclosure, corrections, and calmer language.
+            PIGEON replaces vanity metrics with visible trust tiers earned
+            through responsible posting, helping digital identity move from
+            chasing likes toward shared trust. It shifts platform support from
+            moderation after harm to empowerment before content spreads.
           </p>
         </div>
 
@@ -68,7 +70,7 @@
                     <span class="tier-icon young-bird small" aria-hidden="true">
                       <span></span>
                     </span>
-                    <span>Level 3</span>
+                    <span>Level 3 · Soaring</span>
                   </span>
                 </div>
               </div>
@@ -79,40 +81,56 @@
                   <span></span>
                 </div>
                 <p>Level 1</p>
-                <strong>Nest</strong>
+                <strong>Nesting</strong>
+                <div class="tier-xp">
+                  <span>0-99 Trust XP</span>
+                  <small>Next: 100 XP to Fledging</small>
+                </div>
               </article>
               <article data-tier="2" role="button" tabindex="0" aria-pressed="false">
                 <div class="tier-icon egg" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 2</p>
-                <strong>Nest + Egg</strong>
+                <strong>Fledging</strong>
+                <div class="tier-xp">
+                  <span>100-249 Trust XP</span>
+                  <small>Next: 250 XP to Soaring</small>
+                </div>
               </article>
               <article class="active" data-tier="3" role="button" tabindex="0" aria-pressed="true">
                 <div class="tier-icon young-bird" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 3</p>
-                <strong>Young Bird</strong>
+                <strong>Soaring</strong>
+                <div class="tier-xp">
+                  <span>250-499 Trust XP</span>
+                  <small>Next: 500 XP to Pioneering</small>
+                </div>
               </article>
               <article data-tier="4" role="button" tabindex="0" aria-pressed="false">
                 <div class="tier-icon full-bird" aria-hidden="true">
                   <span></span>
                 </div>
                 <p>Level 4</p>
-                <strong>Full Bird</strong>
+                <strong>Pioneering</strong>
+                <div class="tier-xp">
+                  <span>500+ Trust XP</span>
+                  <small>Leadership tier unlocked</small>
+                </div>
               </article>
             </div>
             <div class="tier-journey-progress" aria-live="polite">
               <div class="tier-progress-heading">
                 <span>Trust journey</span>
-                <strong id="tierProgressLabel">Level 3 · Young Bird</strong>
+                <strong id="tierProgressLabel">Level 3 · Soaring</strong>
               </div>
               <div class="tier-progress-track" aria-hidden="true">
                 <span id="tierProgressFill"></span>
               </div>
               <div class="tier-progress-meta">
-                <span id="tierProgressDescription">Consistent context and disclosure are visible across your content.</span>
+                <span id="tierProgressDescription">Transparency becomes consistent across content and interactions.</span>
                 <b id="tierProgressPercent">75%</b>
               </div>
             </div>
@@ -136,8 +154,9 @@
           <p class="label-eyebrow">Transparency label</p>
           <h2>Content gets context, not a pass/fail stamp.</h2>
           <p>
-            The PIGEON label works like a nutrition label for information,
-            showing transparency signals that users can understand quickly.
+            The PIGEON label gives consumers clear, built-in signals to spot
+            credible and transparent content without turning AI into a
+            gatekeeper.
           </p>
         </div>
 
@@ -182,18 +201,19 @@
           <div class="label-notes">
             <article>
               <span class="principle-icon" aria-hidden="true">⌁</span>
-              <h3>No censorship</h3>
+              <h3>From tools to partnership</h3>
               <p>
-                Users can still view and share content. PIGEON simply makes the
-                transparency profile visible.
+                PIGEON does not decide for people. It equips creators and
+                consumers to verify better, communicate more clearly, and use AI
+                more responsibly.
               </p>
             </article>
             <article>
               <span class="principle-icon globe" aria-hidden="true">◎</span>
-              <h3>Cross-platform potential</h3>
+              <h3>From learning to living MIL</h3>
               <p>
-                The same signal structure can be adopted by platforms, schools,
-                NGOs, and youth programs.
+                MIL is woven into scrolling, sharing, and posting through light
+                nudges that appear only when they matter.
               </p>
             </article>
           </div>
@@ -228,6 +248,13 @@
         </div>
       </section>
 
+      <section class="section highlight-transfer-section">
+        <div class="highlight-transfer">
+          <span>Next</span>
+          <a href="impact-sdg.html">Continue to Impacts & SDGs <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
     </main>
 
     <footer class="site-footer">
@@ -248,32 +275,32 @@
 
         const tiers = {
           1: {
-            label: "Level 1 · Nest",
-            badge: "Level 1",
+            label: "Level 1 · Nesting",
+            badge: "Level 1 · Nesting",
             icon: "nest",
             percent: 25,
-            description: "A first pause makes room for more careful sharing.",
+            description: "Responsible sharing begins with a first pause and source check.",
           },
           2: {
-            label: "Level 2 · Nest + Egg",
-            badge: "Level 2",
+            label: "Level 2 · Fledging",
+            badge: "Level 2 · Fledging",
             icon: "egg",
             percent: 50,
-            description: "Sources and corrections begin to become part of the habit.",
+            description: "Trust signals are added before sharing, including source, AI, and context cues.",
           },
           3: {
-            label: "Level 3 · Young Bird",
-            badge: "Level 3",
+            label: "Level 3 · Soaring",
+            badge: "Level 3 · Soaring",
             icon: "young-bird",
             percent: 75,
-            description: "Consistent context and disclosure are visible across your content.",
+            description: "Transparency becomes consistent across content and interactions.",
           },
           4: {
-            label: "Level 4 · Full Bird",
-            badge: "Level 4",
+            label: "Level 4 · Pioneering",
+            badge: "Level 4 · Pioneering",
             icon: "full-bird",
             percent: 100,
-            description: "Transparent communication becomes a visible standard for others.",
+            description: "Trust-building becomes visible leadership across communities.",
           },
         };
 

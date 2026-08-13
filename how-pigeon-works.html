@@ -36,7 +36,8 @@
             <a href="highlight.html#label">Transparency Label</a>
           </div>
         </div>
-        <a href="impact-sdg.html">Impact & SDG</a>
+        <a href="impact-sdg.html">Impacts & SDGs</a>
+        <a href="feedback.html">Feedback</a>
       </nav>
     </header>
 
@@ -76,9 +77,26 @@
             <b aria-hidden="true">◎</b><span>Instagram</span>
           </button>
           </div>
+
         </div>
 
         <div class="simulation-stage" data-platform-view="tiktok">
+          <button
+            class="scenario-nav scenario-nav-prev"
+            type="button"
+            data-scenario-direction="-1"
+            aria-label="Show previous news example"
+          >
+            ‹
+          </button>
+          <button
+            class="scenario-nav scenario-nav-next"
+            type="button"
+            data-scenario-direction="1"
+            aria-label="Show next news example"
+          >
+            ›
+          </button>
           <article class="social-mockup" aria-live="polite">
             <div class="mockup-header">
               <div>
@@ -90,6 +108,13 @@
 
             <div class="content-card">
               <div class="content-media" id="contentMedia">
+                <img
+                  class="tiktok-news-image"
+                  id="tiktokNewsImage"
+                  src="Picture/News/tiktok_quickupdate.png"
+                  alt=""
+                  aria-hidden="true"
+                />
                 <div class="tiktok-topbar" aria-hidden="true">
                   <span>Following</span>
                   <strong>For You</strong>
@@ -152,7 +177,16 @@
                         A friend warned that this product is unsafe. Please
                         share to protect every family.
                       </p>
-                      <div class="fb-post-media" id="facebookMedia">Community warning preview</div>
+                      <div class="fb-post-media" id="facebookMedia">
+                        <img
+                          class="facebook-news-image"
+                          id="facebookNewsImage"
+                          src="Picture/News/fb_neighbor.png"
+                          alt=""
+                          aria-hidden="true"
+                        />
+                        <span id="facebookMediaLabel">Community warning preview</span>
+                      </div>
                       <div class="fb-engagement">
                         <span>1.8K reactions</span>
                         <span>436 comments</span>
@@ -196,7 +230,7 @@
                     </div>
                     <div class="ig-media">
                       <div class="ig-story-pill" id="instagramMedia">Story preview</div>
-                      <p id="instagramText">This image proves what really happened. Repost if you care.</p>
+                      <p id="instagramText">Photo from today's downtown gathering is being reposted without the original caption.</p>
                     </div>
                     <div class="ig-actions">
                       <button type="button">♡</button>
@@ -211,7 +245,7 @@
                     </div>
                     <div class="ig-caption">
                       <strong id="instagramCaptionCreator">@visualdigest</strong>
-                      <span id="instagramCaptionText">Image context matters before resharing.</span>
+                      <span id="instagramCaptionText">Photo from today's downtown gathering is being reposted without the original caption.</span>
                     </div>
                     <div class="ig-repost-row">
                       <button class="inline-share-trigger share-pulse" type="button">
@@ -243,7 +277,14 @@
                       ↗
                     </button>
                   </div>
-                  <div class="xhs-image-area"></div>
+                  <div class="xhs-image-area">
+                    <img
+                      id="xhsNewsImage"
+                      src="Picture/News/xhs_smoke.png"
+                      alt=""
+                      aria-hidden="true"
+                    />
+                  </div>
                   <div class="xhs-content">
                     <h3 id="xhsTitle">
                       Breaking: viral image shows smoke over downtown after sudden explosion

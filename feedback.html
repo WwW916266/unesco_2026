@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PIGEON Feedback | Shape the Pause</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="feedback-page">
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="PIGEON home">
+        <img class="brand-logo" src="Picture/logo/main.png" alt="" aria-hidden="true" />
+        <span class="brand-title">PIGEON</span>
+        <span class="brand-pill">Protocol</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <div class="nav-group">
+          <a href="what-is-pigeon.html">About Pigeon</a>
+          <div class="nav-dropdown" aria-label="About Pigeon sections">
+            <a href="what-is-pigeon.html#problem">Problem</a>
+            <a href="what-is-pigeon.html#solution">Solution</a>
+          </div>
+        </div>
+        <a href="how-pigeon-works.html">Start your Journey</a>
+        <div class="nav-group">
+          <a href="highlight.html">Highlight</a>
+          <div class="nav-dropdown" aria-label="Highlight sections">
+            <a href="highlight.html#tiers">Trust Tiers</a>
+            <a href="highlight.html#label">Transparency Label</a>
+          </div>
+        </div>
+        <a href="impact-sdg.html">Impacts &amp; SDGs</a>
+        <a href="feedback.html" aria-current="page">Feedback</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="section feedback-section">
+        <div class="feedback-intro">
+          <p class="eyebrow">Participant feedback</p>
+          <h1>Help us make the pause feel useful.</h1>
+          <p>
+            A short reflection helps us understand how PIGEON can support
+            responsible digital communication across different communities.
+          </p>
+          <span class="feedback-note">About 2 minutes · No account needed</span>
+        </div>
+
+        <form class="feedback-form" id="feedbackForm">
+          <div class="feedback-progress" aria-hidden="true">
+            <span class="feedback-progress-label">Feedback flow</span>
+            <span class="feedback-progress-line"><i></i></span>
+            <span class="feedback-progress-count">01 — 03</span>
+          </div>
+          <div class="feedback-step">
+            <div class="feedback-step-heading">
+              <span>01</span>
+              <div>
+                <p class="feedback-kicker">About you</p>
+                <h2>Tell us a little about your perspective.</h2>
+              </div>
+            </div>
+            <div class="feedback-fields">
+              <label class="feedback-field">
+                <span>Age range</span>
+                <select name="age_range" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>Under 18</option>
+                  <option>18–24</option>
+                  <option>25–34</option>
+                  <option>35–44</option>
+                  <option>45–54</option>
+                  <option>55–64</option>
+                  <option>65 or older</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </label>
+              <fieldset class="feedback-field feedback-choice-field">
+                <legend>Your role online</legend>
+                <div class="feedback-choice-grid">
+                  <label><input type="radio" name="role" value="viewer" required /><span>Viewer</span></label>
+                  <label><input type="radio" name="role" value="creator" /><span>Creator</span></label>
+                  <label><input type="radio" name="role" value="both" /><span>Both</span></label>
+                </div>
+              </fieldset>
+              <label class="feedback-field">
+                <span>Continent or region</span>
+                <select name="continent" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>Africa</option>
+                  <option>Asia</option>
+                  <option>Europe</option>
+                  <option>North America</option>
+                  <option>South America</option>
+                  <option>Oceania</option>
+                  <option>Antarctica</option>
+                  <option>Prefer not to say</option>
+                </select>
+              </label>
+            </div>
+          </div>
+
+          <div class="feedback-step">
+            <div class="feedback-step-heading">
+              <span>02</span>
+              <div>
+                <p class="feedback-kicker">Your experience</p>
+                <h2>How did PIGEON feel to use?</h2>
+              </div>
+            </div>
+            <div class="feedback-rating-content">
+              <div class="feedback-helper">
+                <span class="feedback-helper-mark">Rate each moment</span>
+                <span class="feedback-helper-copy">1 means not at all · 5 means completely</span>
+              </div>
+              <div class="rating-list">
+                <fieldset class="rating-row">
+                  <legend>PIGEON felt useful in the moment.</legend>
+                  <div class="star-rating" data-rating="useful" role="radiogroup" aria-label="How useful PIGEON felt">
+                    <button type="button" data-value="1" aria-label="1 star">★</button>
+                    <button type="button" data-value="2" aria-label="2 stars">★</button>
+                    <button type="button" data-value="3" aria-label="3 stars">★</button>
+                    <button type="button" data-value="4" aria-label="4 stars">★</button>
+                    <button type="button" data-value="5" aria-label="5 stars">★</button>
+                  </div>
+                  <input type="hidden" name="useful_rating" required />
+                </fieldset>
+                <fieldset class="rating-row">
+                  <legend>The transparency signals were easy to understand.</legend>
+                  <div class="star-rating" data-rating="clear" role="radiogroup" aria-label="How clear the transparency signals were">
+                    <button type="button" data-value="1" aria-label="1 star">★</button>
+                    <button type="button" data-value="2" aria-label="2 stars">★</button>
+                    <button type="button" data-value="3" aria-label="3 stars">★</button>
+                    <button type="button" data-value="4" aria-label="4 stars">★</button>
+                    <button type="button" data-value="5" aria-label="5 stars">★</button>
+                  </div>
+                  <input type="hidden" name="clear_rating" required />
+                </fieldset>
+                <fieldset class="rating-row">
+                  <legend>The pause fit naturally into the platform experience.</legend>
+                  <div class="star-rating" data-rating="natural" role="radiogroup" aria-label="How natural the pause felt">
+                    <button type="button" data-value="1" aria-label="1 star">★</button>
+                    <button type="button" data-value="2" aria-label="2 stars">★</button>
+                    <button type="button" data-value="3" aria-label="3 stars">★</button>
+                    <button type="button" data-value="4" aria-label="4 stars">★</button>
+                    <button type="button" data-value="5" aria-label="5 stars">★</button>
+                  </div>
+                  <input type="hidden" name="natural_rating" required />
+                </fieldset>
+                <fieldset class="rating-row">
+                  <legend>I would use PIGEON again.</legend>
+                  <div class="star-rating" data-rating="return" role="radiogroup" aria-label="Likelihood of using PIGEON again">
+                    <button type="button" data-value="1" aria-label="1 star">★</button>
+                    <button type="button" data-value="2" aria-label="2 stars">★</button>
+                    <button type="button" data-value="3" aria-label="3 stars">★</button>
+                    <button type="button" data-value="4" aria-label="4 stars">★</button>
+                    <button type="button" data-value="5" aria-label="5 stars">★</button>
+                  </div>
+                  <input type="hidden" name="return_rating" required />
+                </fieldset>
+              </div>
+            </div>
+          </div>
+
+          <div class="feedback-step feedback-step-last">
+            <div class="feedback-step-heading">
+              <span>03</span>
+              <div>
+                <p class="feedback-kicker">One last thought</p>
+                <h2>What should we improve first?</h2>
+              </div>
+            </div>
+            <label class="feedback-field feedback-message-field">
+              <span>Your answer <em>optional</em></span>
+              <textarea name="message" rows="4" placeholder="A moment that felt clear, confusing, or especially helpful..."></textarea>
+            </label>
+            <div class="feedback-submit-row">
+              <p>Your responses will be used to improve the experience and understand what responsible digital communication needs in practice.</p>
+              <button class="button primary feedback-submit-button" type="submit">
+                <span>Send feedback</span>
+                <span aria-hidden="true">→</span>
+              </button>
+            </div>
+            <p class="feedback-status" id="feedbackStatus" role="status" aria-live="polite"></p>
+          </div>
+        </form>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <img class="footer-logo" src="Picture/logo/3.png" alt="" aria-hidden="true" />
+      <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
+    </footer>
+    <script>
+      const feedbackForm = document.querySelector("#feedbackForm");
+      const feedbackStatus = document.querySelector("#feedbackStatus");
+
+      document.querySelectorAll(".star-rating").forEach((rating) => {
+        const fieldName = `${rating.dataset.rating}_rating`;
+        const hiddenInput = feedbackForm.elements[fieldName];
+        const buttons = [...rating.querySelectorAll("button")];
+
+        const setRating = (value) => {
+          hiddenInput.value = value;
+          buttons.forEach((button) => {
+            const active = Number(button.dataset.value) <= value;
+            button.classList.toggle("is-selected", active);
+            button.setAttribute("aria-checked", String(Number(button.dataset.value) === value));
+          });
+        };
+
+        buttons.forEach((button) => {
+          button.setAttribute("role", "radio");
+          button.setAttribute("aria-checked", "false");
+          button.addEventListener("click", () => setRating(Number(button.dataset.value)));
+          button.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowRight" || event.key === "ArrowUp") {
+              event.preventDefault();
+              const next = Math.min(5, Number(button.dataset.value) + 1);
+              buttons[next - 1].focus();
+              setRating(next);
+            }
+            if (event.key === "ArrowLeft" || event.key === "ArrowDown") {
+              event.preventDefault();
+              const next = Math.max(1, Number(button.dataset.value) - 1);
+              buttons[next - 1].focus();
+              setRating(next);
+            }
+          });
+        });
+      });
+
+      feedbackForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        if (!feedbackForm.reportValidity()) return;
+
+        const formData = new FormData(feedbackForm);
+        const response = Object.fromEntries(formData.entries());
+        const missingRating = ["useful_rating", "clear_rating", "natural_rating", "return_rating"]
+          .some((field) => !response[field]);
+        if (missingRating) {
+          feedbackStatus.textContent = "Please choose a star rating for each statement.";
+          return;
+        }
+        const submission = {
+          ...response,
+          submitted_at: new Date().toISOString(),
+        };
+        const saved = JSON.parse(localStorage.getItem("pigeon_feedback") || "[]");
+        saved.push(submission);
+        localStorage.setItem("pigeon_feedback", JSON.stringify(saved));
+
+        feedbackForm.reset();
+        document.querySelectorAll(".star-rating button").forEach((button) => {
+          button.classList.remove("is-selected");
+          button.setAttribute("aria-checked", "false");
+        });
+        feedbackStatus.textContent = "Thank you. Your perspective has been recorded.";
+        feedbackForm.classList.add("is-submitted");
+      });
+    </script>
+  </body>
+</html>

@@ -20,6 +20,7 @@ const platformScenarios = {
         grade: "b",
         moment: "Short-video feed",
         media: "Video Preview",
+        mediaImage: "Picture/News/tiktok_citybrief.png",
         creator: "@citybrief",
         meta: "♪ Original sound · local update",
         text: "The city posted new weekend transit changes. Check the official notice before you share.",
@@ -33,6 +34,7 @@ const platformScenarios = {
         grade: "c",
         moment: "Short-video feed",
         media: "Video Preview",
+        mediaImage: "Picture/News/tiktok_quickupdate.png",
         creator: "@quickupdate",
         meta: "♪ Original sound · trending update",
         text: "Everyone is saying this new rule starts tomorrow. Share this before it gets taken down.",
@@ -46,6 +48,7 @@ const platformScenarios = {
         grade: "d",
         moment: "Short-video feed",
         media: "Video Preview",
+        mediaImage: "Picture/News/tiktok_alertwrite.png",
         creator: "@alertwire",
         meta: "♪ Reused audio · viral clip",
         text: "Emergency warning: schools are closing tomorrow. Forward this now before the announcement is deleted.",
@@ -68,6 +71,7 @@ const platformScenarios = {
         grade: "b",
         moment: "Community group post",
         media: "Community Post",
+        mediaImage: "Picture/News/fb_library.png",
         creator: "Town Library Updates",
         meta: "Public page · 18 min",
         text: "The library shared a schedule change for tomorrow's event and linked the updated city calendar.",
@@ -81,6 +85,7 @@ const platformScenarios = {
         grade: "c",
         moment: "Community group post",
         media: "Community Post",
+        mediaImage: "Picture/News/fb_neighbor.png",
         creator: "Neighborhood Updates",
         meta: "Shared in a local community group",
         text: "A friend warned that this product is unsafe. Please share to protect every family.",
@@ -94,6 +99,7 @@ const platformScenarios = {
         grade: "d",
         moment: "Community group post",
         media: "Community Post",
+        mediaImage: "Picture/News/fb_parentsafety.png",
         creator: "Parents Safety Alert",
         meta: "Forwarded many times · group post",
         text: "Police are hiding reports about strangers near schools. Share this to every parent immediately.",
@@ -110,26 +116,28 @@ const platformScenarios = {
     action: "Share note",
     triggered: "Share action detected. PIGEON appears before reposting.",
     title: "PIGEON note check",
-    subtitle: "Pause before forwarding",
+    subtitle: "",
     examples: [
       {
         grade: "b",
         moment: "Note detail page",
         media: "Xiaohongshu Note",
-        creator: "Media Literacy Lab",
+        mediaImage: "Picture/News/xhs_health.png",
+        creator: "Health Notice Desk",
         meta: "Note detail · source included",
-        text: "AI image detectors can make mistakes. This post links to the original image and explains what was edited.",
-        body: "The creator discloses the image source, edit steps, and why a detector result should not be treated as final proof.",
-        idle: "Use Share note to simulate a B-grade post with visible context.",
-        question: "This note includes source and edit context. Do you want to share with that context visible?",
-        signals: ["Source linked", "Edit context", "Low urgency"],
-        summary: "Context is disclosed",
-        notice: "Notice: Context is present. Keep it attached if you share.",
+        text: "Health bureau confirms limited recall for one bottled tea batch",
+        body: "The note lists the official notice, batch number, and refund channel, so readers can verify the recall before sharing.",
+        idle: "Use Share note to simulate a B-grade lifestyle-news post with visible source context.",
+        question: "This note includes a source and batch detail. Do you want to keep that context attached?",
+        signals: ["Official source", "Batch detail", "Low urgency"],
+        summary: "Recall source cited",
+        notice: "Notice: Source and context are visible. Keep them attached if you share.",
       },
       {
         grade: "c",
         moment: "Note detail page",
         media: "Xiaohongshu Note",
+        mediaImage: "Picture/News/xhs_smoke.png",
         creator: "AI Watch Daily",
         meta: "Note detail · social share",
         text: "Breaking: viral image shows smoke over downtown after sudden explosion",
@@ -144,15 +152,16 @@ const platformScenarios = {
         grade: "d",
         moment: "Note detail page",
         media: "Xiaohongshu Note",
-        creator: "Viral Proof",
-        meta: "Note detail · reposted image",
-        text: "Leaked AI-generated photo proves the incident was staged",
-        body: "The image is being reposted as proof, but no original source, location, timestamp, or AI disclosure is shown.",
-        idle: "Use Share note to simulate a D-grade synthetic-image claim.",
-        question: "This post treats an unverified image as proof. Should it be shared without context?",
-        signals: ["Synthetic risk", "No origin", "Proof claim"],
-        summary: "High-risk image claim",
-        notice: "Notice: Unverified image is presented as proof without origin details.",
+        mediaImage: "Picture/News/xhs_hospital.png",
+        creator: "Clinic Rumor Watch",
+        meta: "Note detail · forwarded post",
+        text: "Forwarded hospital screenshot claims a new outbreak is being hidden",
+        body: "The post uses a cropped chat screenshot as evidence, but shows no hospital notice, date, department, or traceable origin.",
+        idle: "Use Share note to simulate a D-grade health rumor post.",
+        question: "This post treats a cropped screenshot as evidence. Should it be shared as-is?",
+        signals: ["No origin", "Health rumor", "Screenshot claim"],
+        summary: "High-risk health rumor",
+        notice: "Notice: Cropped hospital screenshot has no traceable source or timestamp.",
       },
     ],
   },
@@ -169,9 +178,9 @@ const platformScenarios = {
         media: "Story Preview",
         creator: "@newsroom",
         meta: "Story repost · source tagged",
-        text: "Updated timeline from the newsroom. Original report and correction are linked.",
-        caption: "Source and correction are visible before resharing.",
-        idle: "Use Repost story to simulate a B-grade visual-content check.",
+        text: "City transit update: service alert is confirmed for the morning commute.",
+        caption: "Source-linked update with a clear correction note.",
+        idle: "Use Repost story to simulate a B-grade visual post with source context.",
         question: "The story tags its source and correction. Do you want to keep that context attached?",
         signals: ["Source tagged", "Correction shown", "Low pressure"],
         summary: "Source context visible",
@@ -183,9 +192,9 @@ const platformScenarios = {
         media: "Story Preview",
         creator: "@visualdigest",
         meta: "Story repost · edited image",
-        text: "This image proves what really happened. Repost if you care.",
-        caption: "Image context matters before resharing.",
-        idle: "Use Repost story to simulate a C-grade visual-content context check.",
+        text: "Photo from today's downtown gathering is being reposted without the original caption.",
+        caption: "Edit history and original source are not visible.",
+        idle: "Use Repost story to simulate a C-grade visual post with incomplete context.",
         question: "Is the image source, edit history, or AI use disclosed?",
         signals: ["Visual context", "Emotional pressure", "AI disclosure"],
         summary: "Edit context missing",
@@ -197,9 +206,9 @@ const platformScenarios = {
         media: "Story Preview",
         creator: "@shockdaily",
         meta: "Story repost · viral screenshot",
-        text: "They do not want you to see this screenshot. Repost before it disappears.",
-        caption: "Viral screenshot has no traceable source.",
-        idle: "Use Repost story to simulate a D-grade screenshot rumor.",
+        text: "Reposted screenshot claims bottled water in stores is contaminated.",
+        caption: "No origin, timestamp, or health agency notice is shown.",
+        idle: "Use Repost story to simulate a D-grade rumor-style story post.",
         question: "This screenshot makes a serious claim without traceable origin. Continue sharing?",
         signals: ["No origin", "Manipulation risk", "High pressure"],
         summary: "High-risk screenshot",
@@ -210,11 +219,14 @@ const platformScenarios = {
 };
 
 const platformTabs = document.querySelectorAll(".platform-tab");
+const scenarioNavButtons = document.querySelectorAll(".scenario-nav");
 const perspectiveTabs = document.querySelectorAll(".perspective-tab");
 const simulationSection = document.querySelector(".simulation-section");
 const platformName = document.querySelector("#platformName");
 const platformMoment = document.querySelector("#platformMoment");
+const contentMediaFrame = document.querySelector("#contentMedia");
 const contentMedia = document.querySelector("#contentMediaLabel");
+const tiktokNewsImage = document.querySelector("#tiktokNewsImage");
 const tiktokCreator = document.querySelector("#tiktokCreator");
 const tiktokText = document.querySelector("#tiktokText");
 const tiktokMeta = document.querySelector("#tiktokMeta");
@@ -222,6 +234,8 @@ const facebookCreator = document.querySelector("#facebookCreator");
 const facebookMeta = document.querySelector("#facebookMeta");
 const facebookText = document.querySelector("#facebookText");
 const facebookMedia = document.querySelector("#facebookMedia");
+const facebookNewsImage = document.querySelector("#facebookNewsImage");
+const facebookMediaLabel = document.querySelector("#facebookMediaLabel");
 const instagramCreator = document.querySelector("#instagramCreator");
 const instagramMeta = document.querySelector("#instagramMeta");
 const instagramMedia = document.querySelector("#instagramMedia");
@@ -231,6 +245,7 @@ const instagramCaptionText = document.querySelector("#instagramCaptionText");
 const xhsCreator = document.querySelector("#xhsCreator");
 const xhsTitle = document.querySelector("#xhsTitle");
 const xhsText = document.querySelector("#xhsText");
+const xhsNewsImage = document.querySelector("#xhsNewsImage");
 const overlayTitle = document.querySelector("#overlayTitle");
 const overlaySubtitle = document.querySelector("#overlaySubtitle");
 const popoutGradeText = document.querySelector("#popoutGradeText");
@@ -401,6 +416,7 @@ const creatorImageCases = [
 
 let activePlatform = "tiktok";
 let activeScenario = platformScenarios.tiktok.examples[1];
+let activeScenarioIndex = 0;
 let pigeonPopoutTimer;
 let creatorTypingTimer;
 let creatorTypingPhaseTimer;
@@ -614,7 +630,14 @@ function updateGradeDisplay(grade) {
 }
 
 function updatePlatformContent(platformKey, scenario) {
+  const hasTiktokImage = platformKey === "tiktok" && Boolean(scenario.mediaImage);
+  contentMediaFrame?.classList.toggle("has-platform-image", hasTiktokImage);
+  tiktokNewsImage?.classList.toggle("hidden", !hasTiktokImage);
+
   if (platformKey === "tiktok") {
+    if (scenario.mediaImage && tiktokNewsImage) {
+      tiktokNewsImage.src = scenario.mediaImage;
+    }
     tiktokCreator.textContent = scenario.creator;
     tiktokText.textContent = scenario.text;
     tiktokMeta.textContent = scenario.meta;
@@ -624,7 +647,12 @@ function updatePlatformContent(platformKey, scenario) {
     facebookCreator.textContent = scenario.creator;
     facebookMeta.textContent = scenario.meta;
     facebookText.textContent = scenario.text;
-    facebookMedia.textContent = scenario.media;
+    facebookMedia.classList.toggle("has-platform-image", Boolean(scenario.mediaImage));
+    facebookNewsImage?.classList.toggle("hidden", !scenario.mediaImage);
+    if (scenario.mediaImage && facebookNewsImage) {
+      facebookNewsImage.src = scenario.mediaImage;
+    }
+    if (facebookMediaLabel) facebookMediaLabel.textContent = scenario.media;
   }
 
   if (platformKey === "instagram") {
@@ -633,10 +661,13 @@ function updatePlatformContent(platformKey, scenario) {
     instagramMeta.textContent = scenario.meta;
     instagramMedia.textContent = scenario.media;
     instagramText.textContent = scenario.text;
-    instagramCaptionText.textContent = scenario.caption;
+    instagramCaptionText.textContent = scenario.text;
   }
 
   if (platformKey === "xiaohongshu") {
+    if (scenario.mediaImage && xhsNewsImage) {
+      xhsNewsImage.src = scenario.mediaImage;
+    }
     xhsCreator.textContent = scenario.creator;
     xhsTitle.textContent = scenario.text;
     xhsText.textContent = scenario.body;
@@ -678,23 +709,27 @@ function setPerspective(perspective) {
   setCreatorTutorialVisible(perspective === "creator");
 }
 
-function setPlatform(platformKey) {
+function setViewerScenario(platformKey, scenarioIndex = 0) {
   const platform = platformScenarios[platformKey];
-  const scenario = pickScenario(platformKey);
+  const scenario = platform?.examples?.[scenarioIndex];
   if (!platform || !scenario) return;
   activePlatform = platformKey;
   activeScenario = scenario;
+  activeScenarioIndex = scenarioIndex;
 
   platformTabs.forEach((tab) => {
     tab.classList.toggle("active", tab.dataset.platform === platformKey);
   });
 
   simulationStage.dataset.platformView = platformKey;
+  simulationStage.dataset.scenarioIndex = String(scenarioIndex);
+  simulationStage.dataset.scenarioGrade = scenario.grade;
   platformName.textContent = platform.name;
   platformMoment.textContent = scenario.moment;
   contentMedia.textContent = scenario.media;
   overlayTitle.textContent = platform.title;
   overlaySubtitle.textContent = platform.subtitle;
+  overlaySubtitle.classList.toggle("hidden", !platform.subtitle);
   popoutGradeSummary.textContent = scenario.summary;
   reflectionNotice.textContent = scenario.notice;
   reflectionQuestion.textContent = scenario.question;
@@ -708,8 +743,22 @@ function setPlatform(platformKey) {
   hidePigeonPopout();
 }
 
+function setPlatform(platformKey) {
+  setViewerScenario(platformKey, 0);
+}
+
 platformTabs.forEach((tab) => {
   tab.addEventListener("click", () => setPlatform(tab.dataset.platform));
+});
+
+scenarioNavButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const examples = platformScenarios[activePlatform]?.examples || [];
+    if (!examples.length) return;
+    const direction = Number(button.dataset.scenarioDirection);
+    const nextIndex = (activeScenarioIndex + direction + examples.length) % examples.length;
+    setViewerScenario(activePlatform, nextIndex);
+  });
 });
 
 perspectiveTabs.forEach((tab) => {
@@ -717,9 +766,8 @@ perspectiveTabs.forEach((tab) => {
 });
 
 triggerPigeon.addEventListener("click", () => {
-  const scenario = platformScenarios[activePlatform];
   showPigeonPopout();
-  actionStatus.textContent = scenario.triggered;
+  actionStatus.textContent = activeScenario.triggered;
 });
 
 pigeonGradePopout.addEventListener("click", () => {
@@ -817,5 +865,5 @@ publishTrigger.addEventListener("click", () => {
 updateCreatorStudio();
 setCreatorPhase("case");
 
-setPlatform("tiktok");
+setViewerScenario("tiktok", 0);
 setPerspective("viewer");

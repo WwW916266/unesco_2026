@@ -33,10 +33,17 @@
           <a href="highlight.html">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
             <a href="highlight.html#tiers">Trust Tiers</a>
+            <a href="highlight.html#mil-quiz">MIL Mini Challenge</a>
             <a href="highlight.html#label">Transparency Label</a>
           </div>
         </div>
-        <a href="impact-sdg.html">Impacts &amp; SDGs</a>
+        <div class="nav-group">
+          <a href="impact-sdg.html">Impacts &amp; SDGs</a>
+          <div class="nav-dropdown" aria-label="Impacts and SDGs sections">
+            <a href="impact-sdg.html#impact">Impact</a>
+            <a href="impact-sdg.html#sdgs">SDGs</a>
+          </div>
+        </div>
         <a href="feedback.html" aria-current="page">Feedback</a>
       </nav>
     </header>
@@ -174,12 +181,12 @@
               <span>03</span>
               <div>
                 <p class="feedback-kicker">One last thought</p>
-                <h2>What should we improve first?</h2>
+                <h2>Any questions for us?</h2>
               </div>
             </div>
             <label class="feedback-field feedback-message-field">
               <span>Your answer <em>optional</em></span>
-              <textarea name="message" rows="4" placeholder="A moment that felt clear, confusing, or especially helpful..."></textarea>
+              <textarea name="message" rows="4" placeholder="Ask us anything, or share a moment that felt clear, confusing, or helpful..."></textarea>
             </label>
             <div class="feedback-submit-row">
               <p>Your responses will be used to improve the experience and understand what responsible digital communication needs in practice.</p>
@@ -194,13 +201,32 @@
       </section>
     </main>
 
+    <div class="feedback-success-popout hidden" id="feedbackSuccess" role="dialog" aria-modal="true" aria-labelledby="feedbackSuccessTitle">
+      <div class="feedback-success-card">
+        <button class="feedback-success-close" id="feedbackSuccessClose" type="button" aria-label="Close feedback success message">×</button>
+        <div class="mail-open-icon" aria-hidden="true">
+          <img src="Picture/logo/3.png" alt="" />
+        </div>
+        <p>Message received</p>
+        <h2 id="feedbackSuccessTitle">Feedback submitted successfully.</h2>
+        <span>Thank you for helping PIGEON improve responsible digital communication.</span>
+      </div>
+    </div>
+
     <footer class="site-footer">
       <img class="footer-logo" src="Picture/logo/3.png" alt="" aria-hidden="true" />
       <p>PIGEON showcase concept · AI-assisted transparency for digital trust</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script>
+      const supabaseUrl = "https://enfblscmnnhalsugnysp.supabase.co";
+      const supabasePublishableKey = "sb_publishable_ciKMg5kx76uVNP6RosaFNw_QdEZgcrx";
+      const feedbackClient = window.supabase.createClient(supabaseUrl, supabasePublishableKey);
       const feedbackForm = document.querySelector("#feedbackForm");
       const feedbackStatus = document.querySelector("#feedbackStatus");
+      const feedbackSuccess = document.querySelector("#feedbackSuccess");
+      const feedbackSuccessClose = document.querySelector("#feedbackSuccessClose");
+      const feedbackSubmitButton = feedbackForm.querySelector("button[type='submit']");
 
       document.querySelectorAll(".star-rating").forEach((rating) => {
         const fieldName = `${rating.dataset.rating}_rating`;
@@ -237,7 +263,7 @@
         });
       });
 
-      feedbackForm.addEventListener("submit", (event) => {
+      feedbackForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         if (!feedbackForm.reportValidity()) return;
 
@@ -247,15 +273,32 @@
           .some((field) => !response[field]);
         if (missingRating) {
           feedbackStatus.textContent = "Please choose a star rating for each statement.";
+          feedbackSuccess.classList.add("hidden");
           return;
         }
         const submission = {
-          ...response,
-          submitted_at: new Date().toISOString(),
+          age_range: response.age_range,
+          role: response.role,
+          continent: response.continent,
+          useful_rating: Number(response.useful_rating),
+          clear_rating: Number(response.clear_rating),
+          natural_rating: Number(response.natural_rating),
+          return_rating: Number(response.return_rating),
+          message: response.message || null,
+          page_path: window.location.pathname,
+          user_agent: navigator.userAgent,
         };
-        const saved = JSON.parse(localStorage.getItem("pigeon_feedback") || "[]");
-        saved.push(submission);
-        localStorage.setItem("pigeon_feedback", JSON.stringify(saved));
+
+        feedbackSubmitButton.disabled = true;
+        feedbackStatus.textContent = "Sending feedback...";
+
+        const { error } = await feedbackClient.from("feedback").insert(submission);
+        if (error) {
+          feedbackStatus.textContent = "Feedback could not be sent. Please try again.";
+          feedbackSuccess.classList.add("hidden");
+          feedbackSubmitButton.disabled = false;
+          return;
+        }
 
         feedbackForm.reset();
         document.querySelectorAll(".star-rating button").forEach((button) => {
@@ -263,7 +306,22 @@
           button.setAttribute("aria-checked", "false");
         });
         feedbackStatus.textContent = "Thank you. Your perspective has been recorded.";
+        feedbackSuccess.classList.remove("hidden");
+        feedbackSuccessClose.focus();
+        feedbackSubmitButton.disabled = false;
         feedbackForm.classList.add("is-submitted");
+      });
+
+      feedbackSuccessClose.addEventListener("click", () => {
+        feedbackSuccess.classList.add("hidden");
+      });
+
+      feedbackSuccess.addEventListener("click", (event) => {
+        if (event.target === feedbackSuccess) feedbackSuccess.classList.add("hidden");
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") feedbackSuccess.classList.add("hidden");
       });
     </script>
   </body>

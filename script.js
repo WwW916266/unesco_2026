@@ -1,12 +1,14 @@
 const header = document.querySelector(".site-header");
 
-window.addEventListener("scroll", () => {
-  if (window.scrollY > 12) {
-    header.style.boxShadow = "0 10px 32px rgba(23, 50, 77, 0.08)";
-  } else {
-    header.style.boxShadow = "none";
-  }
-});
+if (header) {
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 12) {
+      header.style.boxShadow = "0 10px 32px rgba(23, 50, 77, 0.08)";
+    } else {
+      header.style.boxShadow = "none";
+    }
+  });
+}
 
 const platformScenarios = {
   tiktok: {
@@ -176,6 +178,7 @@ const platformScenarios = {
         grade: "b",
         moment: "Story reshare",
         media: "Story Preview",
+        mediaImage: "Picture/News/ins_newsroom.png",
         creator: "@newsroom",
         meta: "Story repost · source tagged",
         text: "City transit update: service alert is confirmed for the morning commute.",
@@ -190,6 +193,7 @@ const platformScenarios = {
         grade: "c",
         moment: "Story reshare",
         media: "Story Preview",
+        mediaImage: "Picture/News/ins_visualdigest.png",
         creator: "@visualdigest",
         meta: "Story repost · edited image",
         text: "Photo from today's downtown gathering is being reposted without the original caption.",
@@ -204,6 +208,7 @@ const platformScenarios = {
         grade: "d",
         moment: "Story reshare",
         media: "Story Preview",
+        mediaImage: "Picture/News/ins_shockdaily.png",
         creator: "@shockdaily",
         meta: "Story repost · viral screenshot",
         text: "Reposted screenshot claims bottled water in stores is contaminated.",
@@ -239,6 +244,7 @@ const facebookMediaLabel = document.querySelector("#facebookMediaLabel");
 const instagramCreator = document.querySelector("#instagramCreator");
 const instagramMeta = document.querySelector("#instagramMeta");
 const instagramMedia = document.querySelector("#instagramMedia");
+const instagramNewsImage = document.querySelector("#instagramNewsImage");
 const instagramText = document.querySelector("#instagramText");
 const instagramCaptionCreator = document.querySelector("#instagramCaptionCreator");
 const instagramCaptionText = document.querySelector("#instagramCaptionText");
@@ -271,16 +277,6 @@ const creatorEditor = document.querySelector(".creator-editor");
 const creatorWorkspace = document.querySelector("#creatorWorkspace");
 const creatorCaseGrid = document.querySelector("#creatorCaseGrid");
 const typingStatus = document.querySelector("#typingStatus");
-const previewMediaLabel = document.querySelector("#previewMediaLabel");
-const creatorHandle = document.querySelector("#creatorHandle");
-const creatorHandleText = document.querySelector("#creatorHandleText");
-const creatorMeta = document.querySelector("#creatorMeta");
-const uploadCaseGrid = document.querySelector("#uploadCaseGrid");
-const creatorUploadPanel = document.querySelector(".creator-upload-panel");
-const imageAnalysis = document.querySelector("#imageAnalysis");
-const imageAnalysisGrade = document.querySelector("#imageAnalysisGrade");
-const imageAnalysisTitle = document.querySelector("#imageAnalysisTitle");
-const imageAnalysisText = document.querySelector("#imageAnalysisText");
 const creatorSourceAction = document.querySelector("#creatorSourceAction");
 const creatorAiAction = document.querySelector("#creatorAiAction");
 const creatorToneAction = document.querySelector("#creatorToneAction");
@@ -290,54 +286,46 @@ const creatorMeter = document.querySelector("#creatorMeter");
 const sourceIssue = document.querySelector("#sourceIssue");
 const aiIssue = document.querySelector("#aiIssue");
 const urgencyIssue = document.querySelector("#urgencyIssue");
-const aiMediaMark = document.querySelector("#aiMediaMark");
 const creatorCopy = document.querySelector("#creatorCopy");
+const creatorContextLine = document.querySelector("#creatorContextLine");
+const creatorContextText = document.querySelector("#creatorContextText");
+const creatorDisclosureLine = document.querySelector("#creatorDisclosureLine");
+const creatorPostVisual = document.querySelector("#creatorPostVisual");
+const creatorPreviewImage = document.querySelector("#creatorPreviewImage");
+const creatorImageAnalysis = document.querySelector("#creatorImageAnalysis");
+const creatorImageAnalysisTitle = document.querySelector("#creatorImageAnalysisTitle");
+const creatorImageAnalysisText = document.querySelector("#creatorImageAnalysisText");
 const creatorTierStatus = document.querySelector("#creatorTierStatus");
 const creatorTierStages = document.querySelectorAll(".creator-tier-stage");
+const creatorXpNotice = document.querySelector("#creatorXpNotice");
 
 const creatorDraftCases = [
   {
     title: "Breaking image",
     handle: "@citysignal",
     meta: "Breaking visual update · public post",
-    media: "AI image preview",
-    draft: "Huge update: this AI image proves the downtown explosion happened today. Everyone should share it before it disappears.",
+    mediaImage: "Picture/News/xhs_smoke.png",
+    draft: "This smoke photo proves the downtown explosion happened today. Everyone should share it before it disappears.",
     segments: [
-      { text: "Huge update:", className: "urgency-flag" },
-      { text: "this AI image proves", className: "share-flag" },
-      { text: "the downtown explosion happened today. Everyone should share it before it disappears.", className: "" },
+      { text: "This smoke photo proves", className: "urgency-flag" },
+      { text: "the downtown explosion happened today.", className: "share-flag" },
+      { text: "Everyone should share it before it disappears.", className: "" },
     ],
     fixes: { source: false, ai: false, tone: false },
     progressLabel: "Needs context",
     tierIndex: 0,
-    imageCaseIndex: 0,
     analysisTitle: "Source, tone, and AI disclosure all need work",
     analysisBody: "PIGEON flags this as a high-pressure claim with no source attached and synthetic media risk.",
-    uploadPrompt: "Try a preset photo check after the draft is analyzed.",
-  },
-  {
-    title: "Health claim",
-    handle: "@healthwatch",
-    meta: "Wellness post · social share",
-    media: "Static image preview",
-    draft: "This daily supplement reverses fatigue in one week. My friend fixed everything after one post.",
-    segments: [
-      { text: "This daily supplement", className: "urgency-flag" },
-      { text: "reverses fatigue in one week.", className: "share-flag" },
-      { text: "My friend fixed everything after one post.", className: "" },
-    ],
-    fixes: { source: false, ai: true, tone: false },
-    progressLabel: "Partly disclosed",
-    tierIndex: 1,
-    imageCaseIndex: 2,
-    analysisTitle: "Health claim needs a source and calmer language",
-    analysisBody: "The post sounds confident but does not show a source or evidence for the claim.",
-    uploadPrompt: "Upload a preset image next to see how PIGEON handles visual context.",
+    imageAnalysisTitle: "Smoke image needs a traceable origin",
+    imageAnalysisBody: "The visual looks like evidence, but its original source, date, and edit history are not shown.",
+    improvedCaption: "A smoke photo is circulating after a reported downtown incident. The original source and timing still need verification before sharing.",
+    sourceContext: "Source context: Official incident notice · verification link attached",
   },
   {
     title: "School alert",
     handle: "@parentcircle",
     meta: "Community warning · forward",
+    mediaImage: "Picture/News/fb_parentsafety.png",
     media: "Forwarded screenshot",
     draft: "Schools are closing tomorrow morning. Forward this to every parent before the notice disappears.",
     segments: [
@@ -348,81 +336,44 @@ const creatorDraftCases = [
     fixes: { source: false, ai: false, tone: true },
     progressLabel: "Urgent claim",
     tierIndex: 1,
-    imageCaseIndex: 1,
     analysisTitle: "Urgency is high and the source is missing",
     analysisBody: "PIGEON asks for the official notice first, then suggests reducing the pressure to forward it immediately.",
-    uploadPrompt: "Then try a photo case to see a second type of check.",
-  },
-  {
-    title: "Edited clip",
-    handle: "@visualdesk",
-    meta: "Short clip · edited media",
-    media: "Video preview",
-    draft: "This clip proves the event was staged. Look closely at the cut - that is all the proof you need.",
-    segments: [
-      { text: "This clip proves", className: "urgency-flag" },
-      { text: "the event was staged.", className: "share-flag" },
-      { text: "Look closely at the cut - that is all the proof you need.", className: "" },
-    ],
-    fixes: { source: true, ai: false, tone: false },
-    progressLabel: "Source mentioned",
-    tierIndex: 2,
-    imageCaseIndex: 1,
-    analysisTitle: "Edit history and AI disclosure still need attention",
-    analysisBody: "A source is named, but the edit trail and synthetic media context are still incomplete.",
-    uploadPrompt: "You can also simulate a photo upload once the text review is done.",
+    imageAnalysisTitle: "Safety notice needs an official source",
+    imageAnalysisBody: "The image presents a public warning, but no school, agency, date, or original notice is visible.",
+    improvedCaption: "A school closure notice is circulating in the parent community. Please check the official school or district update before forwarding.",
+    sourceContext: "Source context: School or district notice · verification link attached",
   },
   {
     title: "Product warning",
-    handle: "@shopwatch",
-    meta: "Consumer post · public group",
-    media: "Post preview",
-    draft: "Do not buy this bottle. The brand is hiding a recall and everyone should warn their friends now.",
+    handle: "@parentwatch",
+    meta: "Consumer safety post · public group",
+    mediaImage: "Picture/News/fb_neighbor.png",
+    draft: "Do not use this baby chair. Parents say the brand is hiding a safety recall, and everyone should warn their friends now.",
     segments: [
-      { text: "Do not buy this bottle.", className: "urgency-flag" },
-      { text: "The brand is hiding a recall", className: "share-flag" },
+      { text: "Do not use this baby chair.", className: "urgency-flag" },
+      { text: "the brand is hiding a safety recall", className: "share-flag" },
       { text: "and everyone should warn their friends now.", className: "" },
     ],
     fixes: { source: false, ai: true, tone: false },
     progressLabel: "Warning mode",
     tierIndex: 2,
-    imageCaseIndex: 0,
     analysisTitle: "Consumer warning needs a named recall source",
     analysisBody: "PIGEON sees a strong warning without a clear citation, so it stays in check mode until the source is added.",
-    uploadPrompt: "Move on to a photo preset to finish the full flow.",
+    imageAnalysisTitle: "Product safety image needs context",
+    imageAnalysisBody: "The chair is visible, but the post does not show a product model, recall notice, or traceable safety source.",
+    improvedCaption: "Parents are discussing a possible safety issue involving this baby chair. Check the model and official recall information before sharing.",
+    sourceContext: "Source context: Product model and recall notice · verification link attached",
   },
 ];
 
-const creatorImageCases = [
-  {
-    label: "AI news photo",
-    grade: "c",
-    title: "Source and AI disclosure needed",
-    text: "The photo looks news-like, but origin, edit history, and AI disclosure are missing.",
-  },
-  {
-    label: "Edited screenshot",
-    grade: "d",
-    title: "Screenshot needs a traceable origin",
-    text: "This screenshot is being shared as proof, but no original post, date, or source is visible.",
-  },
-  {
-    label: "Product image",
-    grade: "b",
-    title: "Product photo is mostly traceable",
-    text: "The image includes a named seller and a visible product page, so PIGEON keeps the warning light.",
-  },
-];
 
 let activePlatform = "tiktok";
 let activeScenario = platformScenarios.tiktok.examples[1];
 let activeScenarioIndex = 0;
 let pigeonPopoutTimer;
 let creatorTypingTimer;
-let creatorTypingPhaseTimer;
 let creatorUploadReadyTimer;
 let activeCreatorCaseIndex = 0;
-let activeImageCaseIndex = 0;
 let creatorFlowLocked = true;
 let creatorCurrentDraft = creatorDraftCases[0];
 let creatorPhase = "case";
@@ -465,14 +416,11 @@ function setCreatorPhase(phase) {
 function setCreatorUploadReady(ready) {
   creatorFlowLocked = !ready;
   creatorPigeon.classList.toggle("creator-ready", ready);
-  creatorUploadPanel?.classList.toggle("active", ready);
   setCreatorActionsDisabled(!ready);
-  if (ready && creatorPhase === "analyze") setCreatorPhase("upload");
 }
 
 function clearCreatorTimers() {
   clearTimeout(creatorTypingTimer);
-  clearTimeout(creatorTypingPhaseTimer);
   clearTimeout(creatorUploadReadyTimer);
 }
 
@@ -482,17 +430,10 @@ function updateCreatorCaseButtons(index) {
   });
 }
 
-function updateImageCaseButtons(index) {
-  uploadCaseGrid?.querySelectorAll("button").forEach((button) => {
-    button.classList.toggle("active", Number(button.dataset.imageCase) === index);
-  });
-}
-
 function setCreatorTutorialVisible(isVisible) {
-  const firstCaseButton = creatorCaseGrid?.querySelector("button[data-creator-case='0']");
   const shouldShow = Boolean(isVisible && !creatorTutorialDismissed && creatorFlowLocked);
   creatorEditor?.classList.toggle("tutorial-active", shouldShow);
-  firstCaseButton?.classList.toggle("tutorial-target", shouldShow);
+  creatorCaseGrid?.classList.toggle("tutorial-target", shouldShow);
 }
 
 function dismissCreatorTutorial() {
@@ -516,9 +457,20 @@ function updateCreatorAnalysis(caseData) {
   aiIssue.classList.toggle("resolved", fixes.ai);
   urgencyIssue.textContent = fixes.tone ? "Tone balanced" : "High urgency language";
   urgencyIssue.classList.toggle("resolved", fixes.tone);
-  aiMediaMark.classList.toggle("hidden", !fixes.ai);
   creatorCopy.classList.toggle("tone-balanced", fixes.tone);
   creatorCopy.classList.add("is-highlighted");
+  if (fixes.tone) {
+    creatorCopy.textContent = caseData.improvedCaption;
+  } else {
+    renderTypedDraft(caseData);
+  }
+  creatorContextLine.classList.toggle("hidden", !fixes.source);
+  creatorContextText.textContent = caseData.sourceContext;
+  creatorDisclosureLine.classList.toggle("hidden", !fixes.ai);
+  creatorImageAnalysisTitle.textContent = caseData.imageAnalysisTitle;
+  creatorImageAnalysisText.textContent = caseData.imageAnalysisBody;
+  creatorImageAnalysis.classList.remove("hidden");
+  creatorImageAnalysis.classList.add("active");
   setCreatorPhase("analyze");
 
   [
@@ -545,14 +497,11 @@ function typeCreatorDraft(caseData) {
   creatorCopy.classList.remove("is-highlighted");
   creatorCopy.classList.add("is-typing");
   creatorCopy.textContent = "";
-  previewMediaLabel.textContent = caseData.media;
-  creatorHandleText.textContent = caseData.handle;
-  creatorMeta.textContent = caseData.meta;
-  imageAnalysis.classList.add("hidden");
-  imageAnalysis.classList.remove("active");
-  imageAnalysisGrade.textContent = "Image Grade C";
-  imageAnalysisTitle.textContent = "Source and AI disclosure needed";
-  imageAnalysisText.textContent = "PIGEON checks origin, edit history, and whether synthetic media is disclosed.";
+  creatorContextLine.classList.add("hidden");
+  creatorDisclosureLine.classList.add("hidden");
+  creatorXpNotice.classList.add("hidden");
+  creatorImageAnalysis.classList.add("hidden");
+  creatorImageAnalysis.classList.remove("active");
   setCreatorUploadReady(false);
 
   const draft = caseData.draft;
@@ -570,11 +519,8 @@ function typeCreatorDraft(caseData) {
       updateCreatorAnalysis(caseData);
       setCreatorUploadReady(true);
       creatorUploadReadyTimer = setTimeout(() => {
-        typingStatus.textContent = caseData.uploadPrompt;
+        typingStatus.textContent = "Caption analyzed";
       }, 360);
-      creatorTypingPhaseTimer = setTimeout(() => {
-        setImageCase(caseData.imageCaseIndex);
-      }, 620);
     }
   };
   step();
@@ -597,21 +543,10 @@ function setCreatorCase(index) {
   aiIssue.textContent = "Loading...";
   urgencyIssue.textContent = "Loading...";
   typingStatus.textContent = "Typing draft...";
+  creatorPostVisual.classList.remove("hidden");
+  creatorPreviewImage.src = caseData.mediaImage;
+  creatorPreviewImage.alt = `${caseData.title} simulated news image`;
   typeCreatorDraft(caseData);
-}
-
-function setImageCase(index) {
-  const imageCase = creatorImageCases[index];
-  if (!imageCase) return;
-  activeImageCaseIndex = index;
-  updateImageCaseButtons(index);
-  setCreatorPhase("upload");
-  imageAnalysis.classList.remove("hidden");
-  imageAnalysis.classList.add("active");
-  imageAnalysisGrade.textContent = `Image Grade ${imageCase.grade.toUpperCase()}`;
-  imageAnalysisTitle.textContent = imageCase.title;
-  imageAnalysisText.textContent = imageCase.text;
-  previewMediaLabel.textContent = imageCase.label;
 }
 
 function pickScenario(platformKey) {
@@ -662,6 +597,11 @@ function updatePlatformContent(platformKey, scenario) {
     instagramMedia.textContent = scenario.media;
     instagramText.textContent = scenario.text;
     instagramCaptionText.textContent = scenario.text;
+    instagramNewsImage?.classList.toggle("hidden", !scenario.mediaImage);
+    if (scenario.mediaImage && instagramNewsImage) {
+      instagramNewsImage.src = scenario.mediaImage;
+      instagramNewsImage.alt = `${scenario.creator} simulated Instagram news post`;
+    }
   }
 
   if (platformKey === "xiaohongshu") {
@@ -810,8 +750,7 @@ function updateCreatorStudio() {
     aiIssue.textContent = "No case selected";
     urgencyIssue.textContent = "No case selected";
     creatorCopy.classList.remove("tone-balanced", "is-highlighted");
-    creatorUploadPanel?.classList.remove("active");
-    setCreatorActionsDisabled(true);
+  setCreatorActionsDisabled(true);
     return;
   }
 
@@ -823,12 +762,6 @@ creatorCaseGrid?.addEventListener("click", (event) => {
   if (!button) return;
   dismissCreatorTutorial();
   setCreatorCase(Number(button.dataset.creatorCase));
-});
-
-uploadCaseGrid?.addEventListener("click", (event) => {
-  const button = event.target.closest("button[data-image-case]");
-  if (!button || creatorFlowLocked) return;
-  setImageCase(Number(button.dataset.imageCase));
 });
 
 creatorSourceAction.addEventListener("click", () => {
@@ -856,6 +789,13 @@ creatorToneAction.addEventListener("click", () => {
 publishTrigger.addEventListener("click", () => {
   if (Object.values(creatorCurrentDraft.fixes).every(Boolean)) {
     creatorReadiness.textContent = "Published with context";
+    creatorXpNotice.classList.remove("hidden");
+    creatorXpNotice.classList.remove("is-new");
+    void creatorXpNotice.offsetWidth;
+    creatorXpNotice.classList.add("is-new");
+    const nextTierIndex = Math.min(creatorCurrentDraft.tierIndex + 1, creatorTierStages.length - 1);
+    creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === nextTierIndex));
+    creatorTierStatus.textContent = ["Level 1: Nesting", "Level 2: Fledging", "Level 3: Soaring", "Level 4: Pioneering"][nextTierIndex];
   } else {
     creatorPigeon.classList.add("needs-attention");
     setTimeout(() => creatorPigeon.classList.remove("needs-attention"), 500);

@@ -33,10 +33,17 @@
           <a href="highlight.html" aria-current="page">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
             <a href="highlight.html#tiers">Trust Tiers</a>
+            <a href="highlight.html#mil-quiz">MIL Mini Challenge</a>
             <a href="highlight.html#label">Transparency Label</a>
           </div>
         </div>
-        <a href="impact-sdg.html">Impacts & SDGs</a>
+        <div class="nav-group">
+          <a href="impact-sdg.html">Impacts &amp; SDGs</a>
+          <div class="nav-dropdown" aria-label="Impacts and SDGs sections">
+            <a href="impact-sdg.html#impact">Impact</a>
+            <a href="impact-sdg.html#sdgs">SDGs</a>
+          </div>
+        </div>
         <a href="feedback.html">Feedback</a>
       </nav>
     </header>
@@ -138,13 +145,66 @@
           </div>
 
           <aside class="tier-rules">
-            <span class="mini-tag">What improves a tier</span>
+            <div class="tier-rules-heading">
+              <span>Trust behavior</span>
+              <h3>What improves a tier</h3>
+              <p>Creators move up by making context, sources, and corrections visible before content spreads.</p>
+            </div>
             <ul>
               <li>Link named sources before publishing claims.</li>
               <li>Disclose AI-generated or edited media.</li>
               <li>Add corrections when context changes.</li>
               <li>Reduce panic wording in breaking-news posts.</li>
             </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="mil-quiz" class="section mil-quiz-section">
+        <div class="section-heading">
+          <p class="eyebrow">MIL mini challenge</p>
+          <h2>Practice media literacy in the flow of the platform.</h2>
+          <p>
+            PIGEON can surface short, ad-like learning moments between normal
+            actions, helping users build verification habits without leaving the
+            platform.
+          </p>
+        </div>
+
+        <div class="mil-quiz-showcase" id="milQuizShowcase">
+          <div class="mil-ad-shell">
+            <div class="mil-ad-top">
+              <span>Sponsored learning moment</span>
+              <button type="button" id="milQuizSkip">Skip</button>
+            </div>
+            <div class="mil-ad-card">
+              <div class="mil-ad-badge">
+                <span>Q</span>
+                <strong id="milQuizStep">1 / 3</strong>
+              </div>
+              <div class="mil-ad-copy">
+                <p class="mil-ad-kicker">Core MIL check</p>
+                <h3 id="milQuizQuestion">A post says “Share now before it is deleted.” What should you check first?</h3>
+              </div>
+              <div class="mil-options" id="milQuizOptions" role="group" aria-label="MIL quiz answer choices"></div>
+              <div class="mil-feedback" id="milQuizFeedback" aria-live="polite"></div>
+              <div class="mil-progress" aria-hidden="true">
+                <span id="milQuizProgress"></span>
+              </div>
+            </div>
+          </div>
+
+          <aside class="mil-reward-panel">
+            <span>Trust XP practice</span>
+            <h3>Learning becomes part of responsible participation.</h3>
+            <p>
+              Instead of separating MIL into workshops, PIGEON turns small
+              everyday platform moments into short reflection loops.
+            </p>
+            <div class="mil-reward-meter">
+              <div><strong id="milQuizScore">0</strong><span>/ 3 correct</span></div>
+              <b id="milQuizReward">Complete the challenge to earn Trust XP.</b>
+            </div>
           </aside>
         </div>
       </section>
@@ -339,6 +399,89 @@
         });
 
         selectTier(3);
+      })();
+
+      (() => {
+        const questions = [
+          {
+            question: "A post says “Share now before it is deleted.” What should you check first?",
+            options: ["Whether a named source is visible", "How many likes it has", "Whether the caption sounds exciting"],
+            answer: 0,
+            feedback: "Right. Urgency is a signal to slow down and look for a traceable source.",
+          },
+          {
+            question: "A dramatic image is attached to a breaking-news claim. What makes it more trustworthy?",
+            options: ["A clear origin, date, and context", "A lot of reposts", "All-capital warning text"],
+            answer: 0,
+            feedback: "Correct. Images need source, timing, and context before they become evidence.",
+          },
+          {
+            question: "A creator uses AI-edited media in a post. What should they add before publishing?",
+            options: ["A disclosure label", "More emotional wording", "A hidden comment reply"],
+            answer: 0,
+            feedback: "Yes. Disclosure makes synthetic or edited media easier to interpret responsibly.",
+          },
+        ];
+
+        const quiz = document.querySelector("#milQuizShowcase");
+        const step = document.querySelector("#milQuizStep");
+        const question = document.querySelector("#milQuizQuestion");
+        const options = document.querySelector("#milQuizOptions");
+        const feedback = document.querySelector("#milQuizFeedback");
+        const progress = document.querySelector("#milQuizProgress");
+        const score = document.querySelector("#milQuizScore");
+        const reward = document.querySelector("#milQuizReward");
+        const skip = document.querySelector("#milQuizSkip");
+        if (!quiz || !options) return;
+
+        let index = 0;
+        let correct = 0;
+
+        const render = () => {
+          const item = questions[index];
+          step.textContent = `${index + 1} / ${questions.length}`;
+          question.textContent = item.question;
+          feedback.textContent = "Choose one answer.";
+          options.innerHTML = item.options
+            .map((option, optionIndex) => `<button type="button" data-answer="${optionIndex}">${option}</button>`)
+            .join("");
+          progress.style.width = `${(index / questions.length) * 100}%`;
+        };
+
+        const finish = () => {
+          quiz.classList.add("complete");
+          step.textContent = "Done";
+          question.textContent = "Mini challenge complete.";
+          options.innerHTML = "";
+          feedback.textContent = "You practiced three core MIL habits: source, image context, and AI disclosure.";
+          progress.style.width = "100%";
+          score.textContent = String(correct);
+          reward.textContent = `+${correct * 5} Trust XP earned through MIL practice.`;
+        };
+
+        options.addEventListener("click", (event) => {
+          const button = event.target.closest("button[data-answer]");
+          if (!button) return;
+          const item = questions[index];
+          const selected = Number(button.dataset.answer);
+          const isCorrect = selected === item.answer;
+          if (isCorrect) correct += 1;
+          score.textContent = String(correct);
+          button.classList.add(isCorrect ? "correct" : "incorrect");
+          feedback.textContent = isCorrect ? item.feedback : "Not quite. Look for the answer that improves transparency before sharing.";
+          options.querySelectorAll("button").forEach((option) => {
+            option.disabled = true;
+            if (Number(option.dataset.answer) === item.answer) option.classList.add("correct");
+          });
+          setTimeout(() => {
+            index += 1;
+            if (index >= questions.length) finish();
+            else render();
+          }, 900);
+        });
+
+        skip?.addEventListener("click", finish);
+        render();
       })();
     </script>
 

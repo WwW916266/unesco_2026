@@ -33,10 +33,17 @@
           <a href="highlight.html">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
             <a href="highlight.html#tiers">Trust Tiers</a>
+            <a href="highlight.html#mil-quiz">MIL Mini Challenge</a>
             <a href="highlight.html#label">Transparency Label</a>
           </div>
         </div>
-        <a href="impact-sdg.html">Impacts & SDGs</a>
+        <div class="nav-group">
+          <a href="impact-sdg.html">Impacts &amp; SDGs</a>
+          <div class="nav-dropdown" aria-label="Impacts and SDGs sections">
+            <a href="impact-sdg.html#impact">Impact</a>
+            <a href="impact-sdg.html#sdgs">SDGs</a>
+          </div>
+        </div>
         <a href="feedback.html">Feedback</a>
       </nav>
     </header>
@@ -229,6 +236,7 @@
                       <span>•••</span>
                     </div>
                     <div class="ig-media">
+                      <img id="instagramNewsImage" src="Picture/News/ins_visualdigest.png" alt="" />
                       <div class="ig-story-pill" id="instagramMedia">Story preview</div>
                       <p id="instagramText">Photo from today's downtown gathering is being reposted without the original caption.</p>
                     </div>
@@ -327,6 +335,7 @@
                     aria-expanded="false"
                   >
                     <span class="mini-grade">C</span>
+                    <img class="pigeon-inline-icon" src="Picture/logo/2.png" alt="" aria-hidden="true" />
                     <span>
                       <strong id="popoutGradeText">Info-Grade C</strong>
                       <small id="popoutGradeSummary">No official source found</small>
@@ -341,6 +350,7 @@
                   </button>
                   <div class="pigeon-modal">
                     <div class="overlay-top">
+                      <img class="pigeon-panel-icon" src="Picture/logo/3.png" alt="" aria-hidden="true" />
                       <div>
                         <strong id="overlayTitle">PIGEON Transparency Check</strong>
                         <p id="overlaySubtitle">Pause before sharing</p>
@@ -421,7 +431,7 @@
             <div class="creator-editor">
               <div class="creator-toolbar">
                 <div>
-                  <span class="brand-mark small">P</span>
+                  <img class="creator-pigeon-icon" src="Picture/logo/4.png" alt="" aria-hidden="true" />
                   <div><strong>Creator Publishing Studio</strong><small>PIGEON assist active</small></div>
                 </div>
                 <div class="creator-steps" aria-hidden="true">
@@ -445,65 +455,63 @@
                       <span class="active" data-flow-step="case">Case</span>
                       <span data-flow-step="type">Type</span>
                       <span data-flow-step="analyze">Analyze</span>
-                      <span data-flow-step="upload">Photo</span>
                     </div>
                   </div>
-                  <div class="creator-case-panel" aria-label="Choose a creator draft case">
-                    <div class="creator-case-grid" id="creatorCaseGrid">
-                      <button type="button" data-creator-case="0">Breaking image</button>
-                      <button type="button" data-creator-case="1">Health claim</button>
-                      <button type="button" data-creator-case="2">School alert</button>
-                      <button type="button" data-creator-case="3">Edited clip</button>
-                      <button type="button" data-creator-case="4">Product warning</button>
-                    </div>
-                  </div>
-                  <div class="creator-draft-stage">
-                    <div class="draft-card-top">
-                      <label for="creatorDraft">Post caption</label>
-                      <span id="typingStatus">Choose a case to begin</span>
-                    </div>
-                    <div class="creator-copy" id="creatorCopy">
-                      Select a creator case above to watch PIGEON review the draft before publishing.
-                    </div>
-                  </div>
-                  <div class="creator-preview">
-                    <div class="preview-media" id="previewMedia">
-                      <span id="previewMediaLabel">Media preview</span>
-                    </div>
-                    <div>
-                      <strong id="creatorHandle"><span id="creatorHandleText">@creatorlab</span> <em class="ai-media-mark hidden" id="aiMediaMark">AI generated</em></strong>
-                      <p id="creatorMeta">Draft analysis will appear after typing</p>
-                    </div>
-                  </div>
-                  <div class="creator-upload-panel" aria-label="Simulated image upload analysis">
-                    <div class="upload-panel-top">
-                      <div>
-                        <span>Image upload</span>
-                        <strong>Try a preset photo check</strong>
+                  <div class="creator-dual-checks">
+                    <section class="creator-check-module caption-module" aria-label="Caption pre-publish check">
+                      <div class="creator-module-top">
+                        <img class="creator-module-icon" src="Picture/logo/2.png" alt="" aria-hidden="true" />
+                        <div>
+                          <span>Caption check</span>
+                          <strong>Pre-publish language review</strong>
+                        </div>
+                        <small>Text</small>
                       </div>
-                      <small>Simulated</small>
-                    </div>
-                    <div class="upload-case-grid" id="uploadCaseGrid">
-                      <button type="button" data-image-case="0">AI news photo</button>
-                      <button type="button" data-image-case="1">Edited screenshot</button>
-                      <button type="button" data-image-case="2">Product image</button>
-                    </div>
-                    <div class="image-analysis hidden" id="imageAnalysis">
-                      <span id="imageAnalysisGrade">Image Grade C</span>
-                      <strong id="imageAnalysisTitle">Source and AI disclosure needed</strong>
-                      <p id="imageAnalysisText">PIGEON checks origin, edit history, and whether synthetic media is disclosed.</p>
-                    </div>
-                  </div>
-                  <div class="draft-tools">
-                    <span class="issue-source" id="sourceIssue">No source cited</span>
-                    <span class="issue-ai" id="aiIssue">AI disclosure missing</span>
-                    <span class="issue-urgency" id="urgencyIssue">High urgency language</span>
+                      <div class="creator-case-panel" aria-label="Choose a creator draft case">
+                        <div class="creator-case-grid" id="creatorCaseGrid">
+                          <button type="button" data-creator-case="0">Breaking image</button>
+                          <button type="button" data-creator-case="1">School alert</button>
+                          <button type="button" data-creator-case="2">Product warning</button>
+                        </div>
+                      </div>
+                      <div class="creator-post-visual hidden" id="creatorPostVisual">
+                        <img id="creatorPreviewImage" src="" alt="" />
+                        <span>Attached visual · simulated post</span>
+                      </div>
+                      <div class="creator-draft-stage">
+                        <div class="draft-card-top">
+                          <label for="creatorDraft">Post caption</label>
+                          <span id="typingStatus">Choose a case to begin</span>
+                        </div>
+                        <div class="creator-copy" id="creatorCopy">
+                          Select a creator case above to watch PIGEON review the draft before publishing.
+                        </div>
+                        <div class="creator-context-line hidden" id="creatorContextLine">
+                          <span aria-hidden="true">↗</span>
+                          <span id="creatorContextText">Source context added</span>
+                        </div>
+                        <div class="creator-disclosure-line hidden" id="creatorDisclosureLine">
+                          <span aria-hidden="true">✦</span>
+                          <span>AI-assisted visual disclosure added</span>
+                        </div>
+                        <div class="creator-image-analysis hidden" id="creatorImageAnalysis">
+                          <span>Visual analysis</span>
+                          <strong id="creatorImageAnalysisTitle">Image context needs a closer look</strong>
+                          <p id="creatorImageAnalysisText">PIGEON checks whether the image has a traceable origin, editing context, and clear disclosure.</p>
+                        </div>
+                      </div>
+                      <div class="draft-tools">
+                        <span class="issue-source" id="sourceIssue">No source cited</span>
+                        <span class="issue-ai" id="aiIssue">AI disclosure missing</span>
+                        <span class="issue-urgency" id="urgencyIssue">High urgency language</span>
+                      </div>
+                    </section>
                   </div>
                 </div>
 
                 <aside class="creator-pigeon" id="creatorPigeon">
                   <div class="creator-assist-top">
-                    <span class="brand-mark small">P</span>
+                    <img class="creator-pigeon-icon small" src="Picture/logo/3.png" alt="" aria-hidden="true" />
                     <div>
                       <strong>PIGEON creator check</strong>
                       <p>Improve credibility before publishing</p>
@@ -531,10 +539,27 @@
                     </div>
                     <strong id="creatorTierStatus">Level 1: Nesting</strong>
                   </div>
+                  <div class="creator-xp-notice hidden" id="creatorXpNotice" role="status" aria-live="polite">
+                    <strong>+5 Trust XP</strong>
+                    <span>Responsible sharing moves your tier forward.</span>
+                  </div>
                 </aside>
               </div>
             </div>
           </article>
+        </div>
+      </section>
+
+      <section class="section page-transfer-section journey-transfer-section">
+        <div class="journey-transfer-pair">
+          <div class="page-transfer journey-transfer">
+            <span>Back</span>
+            <a href="index.html"><i aria-hidden="true">←</i> Home</a>
+          </div>
+          <div class="page-transfer journey-transfer">
+            <span>Next</span>
+            <a href="highlight.html">Highlight <i aria-hidden="true">→</i></a>
+          </div>
         </div>
       </section>
 

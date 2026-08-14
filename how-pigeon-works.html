@@ -72,16 +72,16 @@
 
           <div class="platform-tabs" aria-label="Choose a simulated platform">
           <button class="platform-tab active platform-tiktok" type="button" data-platform="tiktok">
-            <b aria-hidden="true">♪</b><span>TikTok</span>
+            <span>TikTok</span>
           </button>
           <button class="platform-tab platform-facebook" type="button" data-platform="facebook">
-            <b aria-hidden="true">f</b><span>Facebook</span>
+            <span>Facebook</span>
           </button>
           <button class="platform-tab platform-xiaohongshu" type="button" data-platform="xiaohongshu">
-            <b aria-hidden="true">小</b><span>XiaoHongShu</span>
+            <span>XiaoHongShu</span>
           </button>
           <button class="platform-tab platform-instagram" type="button" data-platform="instagram">
-            <b aria-hidden="true">◎</b><span>Instagram</span>
+            <span>Instagram</span>
           </button>
           </div>
 
@@ -457,6 +457,9 @@
                       <span data-flow-step="analyze">Analyze</span>
                     </div>
                   </div>
+                  <div class="creator-guidance" id="creatorGuidance" role="status" aria-live="polite">
+                    Choose any case to begin the guided creator flow.
+                  </div>
                   <div class="creator-dual-checks">
                     <section class="creator-check-module caption-module" aria-label="Caption pre-publish check">
                       <div class="creator-module-top">
@@ -539,11 +542,14 @@
                     </div>
                     <strong id="creatorTierStatus">Level 1: Nesting</strong>
                   </div>
-                  <div class="creator-xp-notice hidden" id="creatorXpNotice" role="status" aria-live="polite">
-                    <strong>+5 Trust XP</strong>
-                    <span>Responsible sharing moves your tier forward.</span>
-                  </div>
                 </aside>
+              </div>
+              <div class="creator-xp-notice hidden" id="creatorXpNotice" role="status" aria-live="polite">
+                <img src="Picture/logo/3.png" alt="" aria-hidden="true" />
+                <div>
+                  <strong>+5 Trust XP</strong>
+                  <span>Published with context. Responsible sharing moves your tier forward.</span>
+                </div>
               </div>
             </div>
           </article>

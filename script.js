@@ -287,6 +287,7 @@ const sourceIssue = document.querySelector("#sourceIssue");
 const aiIssue = document.querySelector("#aiIssue");
 const urgencyIssue = document.querySelector("#urgencyIssue");
 const creatorCopy = document.querySelector("#creatorCopy");
+const creatorGuidance = document.querySelector("#creatorGuidance");
 const creatorContextLine = document.querySelector("#creatorContextLine");
 const creatorContextText = document.querySelector("#creatorContextText");
 const creatorDisclosureLine = document.querySelector("#creatorDisclosureLine");
@@ -373,6 +374,7 @@ let activeScenarioIndex = 0;
 let pigeonPopoutTimer;
 let creatorTypingTimer;
 let creatorUploadReadyTimer;
+let creatorXpTimer;
 let activeCreatorCaseIndex = 0;
 let creatorFlowLocked = true;
 let creatorCurrentDraft = creatorDraftCases[0];
@@ -401,6 +403,12 @@ function setCreatorActionsDisabled(disabled) {
   [creatorSourceAction, creatorAiAction, creatorToneAction, publishTrigger].forEach((button) => {
     if (button) button.disabled = disabled;
   });
+}
+
+function setCreatorGuidance(message, mode = "") {
+  if (creatorGuidance) creatorGuidance.textContent = message;
+  creatorEditor?.classList.toggle("guide-improve", mode === "improve");
+  creatorEditor?.classList.toggle("guide-publish", mode === "publish");
 }
 
 function setCreatorPhase(phase) {
@@ -434,6 +442,9 @@ function setCreatorTutorialVisible(isVisible) {
   const shouldShow = Boolean(isVisible && !creatorTutorialDismissed && creatorFlowLocked);
   creatorEditor?.classList.toggle("tutorial-active", shouldShow);
   creatorCaseGrid?.classList.toggle("tutorial-target", shouldShow);
+  if (shouldShow) {
+    setCreatorGuidance("Step 1: choose any case to begin the guided creator flow.");
+  }
 }
 
 function dismissCreatorTutorial() {
@@ -472,6 +483,11 @@ function updateCreatorAnalysis(caseData) {
   creatorImageAnalysis.classList.remove("hidden");
   creatorImageAnalysis.classList.add("active");
   setCreatorPhase("analyze");
+  if (count === 3) {
+    setCreatorGuidance("Final step: the draft is ready. Publish to earn Trust XP.", "publish");
+  } else {
+    setCreatorGuidance("Step 3: read the analysis, then use the suggested improvements on the right.", "improve");
+  }
 
   [
     [creatorSourceAction, fixes.source, "Source citation attached", "Add primary source link", "Done", "+ Source"],
@@ -502,6 +518,7 @@ function typeCreatorDraft(caseData) {
   creatorXpNotice.classList.add("hidden");
   creatorImageAnalysis.classList.add("hidden");
   creatorImageAnalysis.classList.remove("active");
+  setCreatorGuidance("Step 2: watch the caption appear, then read PIGEON's analysis.");
   setCreatorUploadReady(false);
 
   const draft = caseData.draft;
@@ -750,6 +767,7 @@ function updateCreatorStudio() {
     aiIssue.textContent = "No case selected";
     urgencyIssue.textContent = "No case selected";
     creatorCopy.classList.remove("tone-balanced", "is-highlighted");
+    setCreatorGuidance("Step 1: choose any case to begin the guided creator flow.");
   setCreatorActionsDisabled(true);
     return;
   }
@@ -789,14 +807,18 @@ creatorToneAction.addEventListener("click", () => {
 publishTrigger.addEventListener("click", () => {
   if (Object.values(creatorCurrentDraft.fixes).every(Boolean)) {
     creatorReadiness.textContent = "Published with context";
+    clearTimeout(creatorXpTimer);
     creatorXpNotice.classList.remove("hidden");
     creatorXpNotice.classList.remove("is-new");
     void creatorXpNotice.offsetWidth;
     creatorXpNotice.classList.add("is-new");
+    creatorXpTimer = setTimeout(() => creatorXpNotice.classList.add("hidden"), 2800);
+    setCreatorGuidance("Published with context. Trust XP has been added.");
     const nextTierIndex = Math.min(creatorCurrentDraft.tierIndex + 1, creatorTierStages.length - 1);
     creatorTierStages.forEach((stage, index) => stage.classList.toggle("active", index === nextTierIndex));
     creatorTierStatus.textContent = ["Level 1: Nesting", "Level 2: Fledging", "Level 3: Soaring", "Level 4: Pioneering"][nextTierIndex];
   } else {
+    setCreatorGuidance("Complete the suggested improvements before publishing.", "improve");
     creatorPigeon.classList.add("needs-attention");
     setTimeout(() => creatorPigeon.classList.remove("needs-attention"), 500);
   }

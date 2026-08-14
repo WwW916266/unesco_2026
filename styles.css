@@ -12417,12 +12417,14 @@ body {
   .label-eyebrow,
   .feedback-intro .eyebrow,
   .impact-module-heading span {
-    padding: 0;
+    padding: 6px 11px;
     color: #2f819f;
-    background: transparent;
-    font-size: 0.6rem;
-    font-weight: 820;
-    letter-spacing: 0.14em;
+    background: rgba(47, 129, 159, 0.06);
+    border: 1px solid rgba(47, 129, 159, 0.22);
+    border-radius: 999px;
+    font-size: 0.58rem;
+    font-weight: 850;
+    letter-spacing: 0.12em;
   }
 
   .eyebrow::before,
@@ -12431,12 +12433,7 @@ body {
   .label-eyebrow::before,
   .feedback-intro .eyebrow::before,
   .impact-module-heading span::before {
-    display: inline-block;
-    width: 18px;
-    height: 1px;
-    margin-right: 8px;
-    content: "";
-    background: rgba(47, 129, 159, 0.72);
+    display: none;
   }
 
   .hero-actions,

@@ -12408,3 +12408,85 @@ body {
     padding-left: 16px;
   }
 }
+
+/* Mobile comfort pass: centered actions and quieter section labels. */
+@media (max-width: 760px) {
+  .eyebrow,
+  .problem-eyebrow,
+  .solution-eyebrow,
+  .label-eyebrow,
+  .feedback-intro .eyebrow,
+  .impact-module-heading span {
+    padding: 0;
+    color: #2f819f;
+    background: transparent;
+    font-size: 0.6rem;
+    font-weight: 820;
+    letter-spacing: 0.14em;
+  }
+
+  .eyebrow::before,
+  .problem-eyebrow::before,
+  .solution-eyebrow::before,
+  .label-eyebrow::before,
+  .feedback-intro .eyebrow::before,
+  .impact-module-heading span::before {
+    display: inline-block;
+    width: 18px;
+    height: 1px;
+    margin-right: 8px;
+    content: "";
+    background: rgba(47, 129, 159, 0.72);
+  }
+
+  .hero-actions,
+  .social-actions,
+  .feedback-submit-row,
+  .reflection-options,
+  .ig-repost-row,
+  .page-transfer,
+  .highlight-transfer,
+  .journey-transfer-pair {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .hero-actions {
+    justify-items: center;
+    width: 100%;
+    max-width: none;
+  }
+
+  .hero-actions .button,
+  .hero-about-link,
+  .share-button,
+  .publish-trigger,
+  .feedback-submit-row .button {
+    width: min(100%, 280px);
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .feedback-submit-row p {
+    max-width: 32ch;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .creator-toolbar {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .creator-toolbar > div:first-child {
+    justify-content: center;
+  }
+
+  .creator-steps,
+  .creator-flow-steps,
+  .platform-tabs,
+  .perspective-tabs {
+    justify-content: center;
+  }
+}

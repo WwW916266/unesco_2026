@@ -24,7 +24,7 @@
         <div class="nav-group">
           <a href="what-is-pigeon.html">About Pigeon</a>
           <div class="nav-dropdown" aria-label="About Pigeon sections">
-            <a href="what-is-pigeon.html#problem">Problem</a>
+            <a href="what-is-pigeon.html#problem">Core Problem</a>
             <a href="what-is-pigeon.html#solution">Solution</a>
           </div>
         </div>
@@ -32,16 +32,16 @@
         <div class="nav-group">
           <a href="highlight.html">Highlight</a>
           <div class="nav-dropdown" aria-label="Highlight sections">
-            <a href="highlight.html#tiers">Trust Tiers</a>
+            <a href="highlight.html#tiers">Trust Tier</a>
             <a href="highlight.html#mil-quiz">MIL Mini Challenge</a>
             <a href="highlight.html#label">Transparency Label</a>
           </div>
         </div>
         <div class="nav-group">
-          <a href="impact-sdg.html">Impacts &amp; SDGs</a>
-          <div class="nav-dropdown" aria-label="Impacts and SDGs sections">
+          <a href="impact-sdg.html">Impact &amp; SDG</a>
+          <div class="nav-dropdown" aria-label="Impact and SDG sections">
             <a href="impact-sdg.html#impact">Impact</a>
-            <a href="impact-sdg.html#sdgs">SDGs</a>
+            <a href="impact-sdg.html#sdgs">SDG</a>
           </div>
         </div>
         <a href="feedback.html" aria-current="page">Feedback</a>
@@ -87,6 +87,17 @@
                   <option>55–64</option>
                   <option>65 or older</option>
                   <option>Prefer not to say</option>
+                </select>
+              </label>
+              <label class="feedback-field">
+                <span>Gender</span>
+                <select name="gender" required>
+                  <option value="" selected disabled>Select one</option>
+                  <option>Female</option>
+                  <option>Male</option>
+                  <option>Non-binary</option>
+                  <option>Prefer not to say</option>
+                  <option>Self-describe</option>
                 </select>
               </label>
               <fieldset class="feedback-field feedback-choice-field">
@@ -278,6 +289,7 @@
         }
         const submission = {
           age_range: response.age_range,
+          gender: response.gender,
           role: response.role,
           continent: response.continent,
           useful_rating: Number(response.useful_rating),

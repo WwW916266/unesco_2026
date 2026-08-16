@@ -10738,6 +10738,23 @@ body {
   border: 0;
 }
 
+.hero-film-fallback {
+  justify-self: start;
+  color: #4f595c;
+  font-size: 0.68rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(22, 25, 27, 0.22);
+  transition: color 160ms ease, border-color 160ms ease;
+}
+
+.hero-film-fallback:hover,
+.hero-film-fallback:focus-visible {
+  color: #2f819f;
+  border-bottom-color: #2f819f;
+}
+
 .hero-film-screen {
   position: relative;
   min-height: 100%;

@@ -10657,6 +10657,28 @@ body {
   background: #f4f5f1;
 }
 
+.home-faq-module .impact-module-heading {
+  display: grid;
+  gap: 10px;
+}
+
+.home-faq-module .impact-module-heading::before {
+  width: 52px;
+}
+
+.home-faq-module .impact-module-heading h3 {
+  font-family: "DM Serif Display", Georgia, serif;
+  font-size: clamp(2.75rem, 5vw, 4.8rem);
+  font-weight: 400;
+  line-height: 0.94;
+}
+
+@media (max-width: 760px) {
+  .home-faq-module .impact-module-heading h3 {
+    font-size: clamp(2.1rem, 10vw, 3.2rem);
+  }
+}
+
 .hero-film {
   display: grid;
   gap: 12px;

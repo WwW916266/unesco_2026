@@ -10663,7 +10663,7 @@ body {
 }
 
 .home-faq-module .impact-module-heading::before {
-  width: 52px;
+  display: none;
 }
 
 .home-faq-module .impact-module-heading h3 {
